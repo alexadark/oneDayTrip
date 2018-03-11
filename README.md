@@ -1,6 +1,6 @@
 # oneDayTrip
 car pooling app oriented at one day trips for tourism
-<img src="http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png" width="100">>
+<img src="http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png" width="100">
 
 
 # Brief
