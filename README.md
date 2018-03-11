@@ -5,9 +5,9 @@ car pooling app oriented at one day trips for tourism
 This is a javascript full stack app using mongodb, mongoose, node.js, express, react, sass and uikit
 <br>
 
-<img src="https://www.codejobs.biz/public/images/blog/original/f25dbdd3b4e25c4.png" width="300" >
-<img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/359/landscape/expressjslogo.png" width="200" >
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" width="200">
+<img src="https://www.codejobs.biz/public/images/blog/original/f25dbdd3b4e25c4.png" width="300" style="float: left;" >
+<img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/359/landscape/expressjslogo.png" width="200" style="float: left; >
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" width="200" style="float: left;>
 
 
 # Brief
