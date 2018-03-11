@@ -1,5 +1,8 @@
 # oneDayTrip
 car pooling app oriented at one day trips for tourism
+
+# Technology
+This is a javascript full stack app using mongodb, mongoose, node.js, express, react, sass and uikit
 <img src="http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png" width="100">
 
 
