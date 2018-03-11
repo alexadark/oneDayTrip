@@ -4,7 +4,7 @@ car pooling app oriented at one day trips for tourism
 # Technology
 This is a javascript full stack app using mongodb, mongoose, node.js, express, react, sass and uikit
 <br>
-<img src="http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png" width="100">
+<img src="https://www.codejobs.biz/public/images/blog/original/f25dbdd3b4e25c4.png" width="200">
 
 
 # Brief
