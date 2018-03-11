@@ -17,7 +17,7 @@ You can see model [here](https://github.com/alexadark/oneDayTrip/blob/master/mod
 You can see the wireframes with annoted functionalities [here](https://github.com/alexadark/oneDayTrip/blob/master/OneDayTrip.pdf)
 
 # Technology
-This is a javascript full stack app using mongodb, mongoose, node.js, express, react, sass and uikit
+This is a full stack javascript app using mongodb, mongoose, node.js, express, react, sass and uikit
 <br>
 
 <img src="https://www.codejobs.biz/public/images/blog/original/f25dbdd3b4e25c4.png" width="300" >
