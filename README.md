@@ -1,8 +1,7 @@
 # oneDayTrip
 car pooling app oriented at one day trips for tourism
+<img src="http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png" width="100">>
 
-#technology
-![mongodb](http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png)
 
 # Brief
 This app works as blabla car but with an orientation to one day trips for tourism : 
