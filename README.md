@@ -1,6 +1,9 @@
 # oneDayTrip
 car pooling app oriented at one day trips for tourism
 
+#technology
+![mongodb](http://thisissanjeeva.com/wp-content/uploads/2017/07/mongo-db.png)
+
 # Brief
 This app works as blabla car but with an orientation to one day trips for tourism : 
 All trips have a return in the same day, and the user can see all the trips available from a choosen point, and between 2 dates
@@ -12,3 +15,6 @@ This is a starting point, as i will continue developing features on this app as 
 
 # Model
 You can see model [here](https://github.com/alexadark/oneDayTrip/blob/master/model.jpg)
+
+# Views and functionalities
+You can see the wireframes with annoted functionalities [here](https://github.com/alexadark/oneDayTrip/blob/master/OneDayTrip.pdf)
