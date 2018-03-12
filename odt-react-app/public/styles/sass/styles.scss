@@ -1,0 +1,18 @@
+@import 'media-queries';
+@import 'mymixins';
+@import 'settings';
+@import '../../../node_modules/uikit/src/scss/variables-theme.scss';
+@import '../../../node_modules/uikit/src/scss/mixins-theme.scss';
+@import 'hooks';
+
+/*---------------------------------------------
+Partials
+___________________________________________*/
+@import 'partials/default';
+@import 'partials/typo';
+@import 'partials/structure';
+@import 'partials/header';
+@import 'partials/footer';
+@import 'partials/content';
+
+@import 'custom';
