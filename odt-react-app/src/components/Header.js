@@ -12,6 +12,8 @@ const Header = () => (
                          activeClassName="is-active">Publish</NavLink>
                 <NavLink className="uk-button uk-button-small uk-button-primary uk-margin-small-right" to="/sign-up"
                          activeClassName="is-active">Sign Up</NavLink>
+                <NavLink className="uk-button uk-button-small uk-button-primary uk-margin-small-right" to="/user-panel"
+                         activeClassName="is-active">User Panel</NavLink>
             </nav>
         </div>
 
