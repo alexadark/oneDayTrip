@@ -1,8 +1,14 @@
 import React from 'react';
+import Hero from './Hero';
+import TripList from './TripList'
 
 const Home = () => (
     <div>
-        <h1>Home</h1>
+        <Hero/>
+        <div className="uk-container uk-padding">
+            <h2 className="uk-text-center">This week in your area</h2>
+            <TripList/>
+        </div>
     </div>
 );
 

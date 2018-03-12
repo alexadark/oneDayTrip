@@ -9961,6 +9961,9 @@ iframe.uk-cover {
 /*---------------------------------------------
 Partials
 ___________________________________________*/
+.hero {
+  background: #2D3047; }
+
 .uk-input {
   height: 45px; }
 /*# sourceMappingURL=styles.css.map */

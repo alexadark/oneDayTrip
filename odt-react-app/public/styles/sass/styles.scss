@@ -1,9 +1,11 @@
 @import 'media-queries';
 @import 'mymixins';
 @import 'settings';
-@import '../../../node_modules/uikit/src/scss/variables-theme.scss';
-@import '../../../node_modules/uikit/src/scss/mixins-theme.scss';
+@import '../../vendor/uikit/scss/variables-theme.scss';
+@import '../../vendor/uikit/scss/mixins-theme.scss';
 @import 'hooks';
+@import '../../vendor/uikit/scss/uikit-theme.scss';
+
 
 /*---------------------------------------------
 Partials
@@ -12,6 +14,7 @@ ___________________________________________*/
 @import 'partials/typo';
 @import 'partials/structure';
 @import 'partials/header';
+@import 'partials/hero';
 @import 'partials/footer';
 @import 'partials/content';
 
