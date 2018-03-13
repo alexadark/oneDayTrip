@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
+import UserPublishedTrips from './UserPublishedTrips'
+import UserBookedTrips from './UserBookedTrips'
 
 class UserPanel extends Component {
     constructor(props){
@@ -15,6 +17,11 @@ class UserPanel extends Component {
                     <button className="uk-button uk-button-primary uk-button-small  uk-margin-right">Delete Profile</button>
                     <button className="uk-button uk-button-primary uk-button-small  uk-margin-right">change password</button>
                     <NavLink to="/user-profile" ><button className="uk-button uk-button-primary uk-button-small uk-margin-right">see my reviews</button></NavLink>
+                </div>
+
+                <div className="user-panels uk-margin-large-top uk-child-width-1-2@m" data-uk-grid >
+                    <UserPublishedTrips/>
+                    <UserBookedTrips/>
 
                 </div>
 

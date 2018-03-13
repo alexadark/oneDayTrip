@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class PublishTrip extends Component {
+class Publish extends Component {
     constructor(props){
         super(props)
     }
@@ -59,4 +59,4 @@ class PublishTrip extends Component {
 }
 
 
-export default PublishTrip;
+export default Publish;

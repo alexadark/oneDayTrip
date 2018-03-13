@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
 
 class TripListItem extends Component {
     constructor(props){
@@ -22,9 +23,9 @@ class TripListItem extends Component {
                         <p>Available seats</p>
                     </div>
                     <div className="">
-                    <button className="uk-button uk-button-primary ">
+                    <NavLink className="uk-button uk-button-primary " to="/trip-info">
                         View details and book
-                    </button>
+                    </NavLink>
                     </div>
 
 
