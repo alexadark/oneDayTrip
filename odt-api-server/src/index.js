@@ -120,7 +120,7 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
             tripTime,
             seats,
             description,
-            creator: {"_id":ObjectId(creatorId)}
+            creator: {"_id": ObjectId(creatorId)}
         }))
         .then(trip => {
             res.json(success({trip}))
@@ -135,9 +135,15 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
  */
 router.get('/trips/:creatorId', (req, res) => {
     const {params: {creatorId}} = req;
-    Trip.find({creator: {"_id":ObjectId(creatorId)}})
+    const creator = {"_id": ObjectId(creatorId)}
+//TODO to fix
+    Promise.resolve()
+        .then(() => Trip.find({creator}))
         .then(trips => {
             res.json(success({trips}))
+        })
+        .catch(err => {
+            res.json(fail(err.message))
         })
 
 
@@ -151,7 +157,7 @@ router.delete('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
     const {params: {creatorId, tripId}} = req;
 
     Promise.resolve()
-        .then(() => User.findOne({"_id":ObjectId(creatorId)}))
+        .then(() => User.findOne({"_id": ObjectId(creatorId)}))
         .then(user => {
             if (user.password !== password) throw Error('wrong password');
 
@@ -175,7 +181,7 @@ router.put('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
     const {params: {creatorId, tripId}} = req;
 
     Promise.resolve()
-        .then(() => User.findOne({"_id":ObjectId(creatorId)}))
+        .then(() => User.findOne({"_id": ObjectId(creatorId)}))
         .then(user => {
             if (user.password !== password) throw Error('wrong password');
 
@@ -211,11 +217,11 @@ router.put('/trip/join/:tripId/:passengerId', (req, res) => {
 
 
     Promise.resolve()
-        .then(()=> Trip.findOne({"_id":ObjectId(tripId)}))
+        .then(() => Trip.findOne({"_id": ObjectId(tripId)}))
         .then(trip => {
-            if(!trip.passengers) trip.passengers = [];
+            if (!trip.passengers) trip.passengers = [];
             //TODO error if a passenger is already on a trip
-            if((trip.passengers).includes({"_id": ObjectId(passengerId)}) ) throw Error ('this passenger has already' +
+            if ((trip.passengers).includes({"_id": ObjectId(passengerId)})) throw Error('this passenger has already' +
                 ' joined this trip')
             trip.passengers.push({"_id": ObjectId(passengerId)})
             return trip.save()
@@ -236,11 +242,11 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
     const passenger = {"_id": ObjectId(passengerId)}
 
     Promise.resolve()
-        .then(()=> Trip.findOne({"_id":ObjectId(tripId)}))
+        .then(() => Trip.findOne({"_id": ObjectId(tripId)}))
         .then(trip => {
             const passengersArray = trip.passengers
             const index = passengersArray.indexOf(passenger)
-            passengersArray.splice(index,1)
+            passengersArray.splice(index, 1)
 
             return trip.save()
         })
@@ -257,7 +263,7 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
  * User rate other user
  */
 
-router.put('/user/rate/:ratedUserId/:userId', jsonBodyParser, (req,res) => {
+router.put('/user/rate/:ratedUserId/:userId', jsonBodyParser, (req, res) => {
     const {params: {ratedUserId, userId}} = req;
     const {body: {rating}} = req;
     const ratedUser = {"_id": ObjectId(ratedUserId)}
@@ -272,8 +278,8 @@ router.put('/user/rate/:ratedUserId/:userId', jsonBodyParser, (req,res) => {
     Promise.resolve()
         .then((user) => User.findOne(ratedUser))
         .then((user) => {
-        if(!user.ratings) user.ratings = [];
-        user.ratings.push(ratingObj)
+            if (!user.ratings) user.ratings = [];
+            user.ratings.push(ratingObj)
             return user.save()
 
         })
@@ -290,7 +296,7 @@ router.put('/user/rate/:ratedUserId/:userId', jsonBodyParser, (req,res) => {
  * user let comment to other user
  */
 
-router.put('/user/comment/:commentedUserId/:userId', jsonBodyParser, (req,res) => {
+router.put('/user/comment/:commentedUserId/:userId', jsonBodyParser, (req, res) => {
     const {params: {commentedUserId, userId}} = req;
     const {body: {comment}} = req;
     const commentedUser = {"_id": ObjectId(commentedUserId)};
@@ -300,11 +306,11 @@ router.put('/user/comment/:commentedUserId/:userId', jsonBodyParser, (req,res) =
         date: moment(),
         comment
     }
-console.log(commentObj)
+    console.log(commentObj)
     Promise.resolve()
         .then((user) => User.findOne(commentedUser))
         .then((user) => {
-            if(!user.comments) user.comments = [];
+            if (!user.comments) user.comments = [];
             user.comments.push(commentObj)
             return user.save()
         })
