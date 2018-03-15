@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const {success, fail} = require('./api-utils');
 const bodyParser = require('body-parser');
 const {User, Trip, Comment} = require('./models/index');
+const _ = require('lodash')
 
 const moment = require('moment');
 const ObjectId = require('mongodb').ObjectID;
@@ -205,14 +206,17 @@ router.put('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
  * Join a trip : will happen on click book button, getting the id from the trip
  */
 
-router.patch('/trip/:tripId/:passengerId', (req, res) => {
+router.put('/trip/join/:tripId/:passengerId', (req, res) => {
     const {params: {tripId, passengerId}} = req;
 
 
     Promise.resolve()
         .then(()=> Trip.findOne({"_id":ObjectId(tripId)}))
         .then(trip => {
-            if(!trip.passengers) trip.passengers = []
+            if(!trip.passengers) trip.passengers = [];
+            //TODO error if a passenger is already on a trip
+            if((trip.passengers).includes({"_id": ObjectId(passengerId)}) ) throw Error ('this passenger has already' +
+                ' joined this trip')
             trip.passengers.push({"_id": ObjectId(passengerId)})
             return trip.save()
         })
@@ -227,20 +231,44 @@ router.patch('/trip/:tripId/:passengerId', (req, res) => {
 /**
  * Unjoin trip
  */
+router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
+    const {params: {tripId, passengerId}} = req;
+    const passenger = {"_id": ObjectId(passengerId)}
 
+    Promise.resolve()
+        .then(()=> Trip.findOne({"_id":ObjectId(tripId)}))
+        .then(trip => {
+            const passengersArray = trip.passengers
+            const index = passengersArray.indexOf(passenger)
+            passengersArray.splice(index,1)
+
+            return trip.save()
+        })
+        .then(() => {
+            res.json(success())
+        })
+        .catch(err => {
+            res.json(fail(err.message))
+        })
+});
 
 
 /**
  * User rate other user
  */
 
-router.patch('/user/:username/:id', jsonBodyParser, (req,res) => {
-    const {params: {username, id}} = req;
+router.put('/user/rate/:ratedUserId/:ratingUserId', jsonBodyParser, (req,res) => {
+    const {params: {ratedUserId, ratingUserId}} = req;
     const {body: {rating}} = req;
+    const ratedUser = {"_id": ObjectId(ratedUserId)}
+    const ratingUser = {"_id": ObjectId(ratingUserId)}
+
 
     Promise.resolve()
-        .then((user) => User.findOne({username}))
-        .then((user) => User.updateOne({"_id": ObjectId(id)}, {rating}))
+        .then((user) => User.findOne(ratedUser))
+        .then((user) => {
+
+        })
         .then(() => {
             res.json(success())
         })
