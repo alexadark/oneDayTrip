@@ -5,8 +5,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const {success, fail} = require('./api-utils');
 const bodyParser = require('body-parser');
-const User = require('./models/User');
-const Trip = require('./models/Trip');
+const {User, Trip, Comment} = require('./models/index');
+
 const moment = require('moment');
 const ObjectId = require('mongodb').ObjectID;
 
