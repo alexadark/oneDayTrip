@@ -205,13 +205,17 @@ router.put('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
  * Join a trip : will happen on click book button, getting the id from the trip
  */
 
-router.patch('/trip/:username/:id', (req, res) => {
-    const {params: {username, id}} = req;
+router.patch('/trip/:tripId/:passengerId', (req, res) => {
+    const {params: {tripId, passengerId}} = req;
 
 
     Promise.resolve()
-        .then(() => User.findOne({username}))
-        .then((user) => Trip.updateOne({"_id": ObjectId(id)}, {passengers: [user.username]}))
+        .then(()=> Trip.findOne({"_id":ObjectId(tripId)}))
+        .then(trip => {
+            if(!trip.passengers) trip.passengers = []
+            trip.passengers.push({"_id": ObjectId(passengerId)})
+            return trip.save()
+        })
         .then(() => {
             res.json(success())
         })
@@ -223,6 +227,8 @@ router.patch('/trip/:username/:id', (req, res) => {
 /**
  * Unjoin trip
  */
+
+
 
 /**
  * User rate other user
