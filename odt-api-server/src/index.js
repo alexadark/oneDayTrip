@@ -41,7 +41,6 @@ router.post('/user', jsonBodyParser, (req, res) => {
     Promise.resolve()
         .then(() => User.findOne({username})
             .then(user => {
-                if (user) throw Error('user already exists');
                 return User.create({name, surname, email, picture, username, password})
             })
             .then(username => res.json(success({username})))
@@ -52,21 +51,21 @@ router.post('/user', jsonBodyParser, (req, res) => {
 /**
  * Delete user
  */
-router.delete('/user/:username', jsonBodyParser, (req, res) => {
+router.delete('/user/:id', jsonBodyParser, (req, res) => {
     const {body: {password}} = req;
-    const {params: {username}} = req;
+    const {params: {id}} = req;
 
     Promise.resolve()
-        .then(() => User.findOne({username}))
+        .then(() => User.findOne({"_id": ObjectId(id)}))
         .then(user => {
             if (!user) throw Error('user does not exists');
             if (user.password !== password) throw Error('wrong password');
 
-            return User.deleteOne({username})
+            return User.deleteOne({"_id": ObjectId(id)})
 
         })
         .then(() => {
-            res.json(success(`Your account ${username} has been deleted`))
+            res.json(success(`Your account ${id} has been deleted`))
         })
         .catch(err => {
             res.json(fail(err.message))
@@ -77,21 +76,21 @@ router.delete('/user/:username', jsonBodyParser, (req, res) => {
 /**
  * Update user
  */
-router.put('/user/:username', jsonBodyParser, (req, res) => {
+router.put('/user/:id', jsonBodyParser, (req, res) => {
     const {body: {name, surname, email, picture, password, newPassword}} = req;
-    const {params: {username}} = req;
+    const {params: {id}} = req;
 
     Promise.resolve()
-        .then((() => User.findOne({username})))
+        .then((() => User.findOne({"_id": ObjectId(id)})))
         .then(user => {
             if (!user) throw Error('user does not exists');
             if (user.password !== password) throw Error('wrong password');
 
-            return User.updateOne({username}, {name, surname, email, picture, password: newPassword})
+            return User.updateOne({"_id": ObjectId(id)}, {name, surname, email, picture, password: newPassword})
 
         })
         .then(() => {
-            res.json(success(`${username} successfully updated`))
+            res.json(success(`${id} successfully updated`))
         })
         .catch(err => {
             res.json(fail(err.message))
@@ -102,9 +101,9 @@ router.put('/user/:username', jsonBodyParser, (req, res) => {
 /**
  * Create Trip
  */
-router.post('/trip/:username', jsonBodyParser, (req, res) => {
+router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
     const {body: {from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description}} = req;
-    const {params: {username}} = req;
+    const {params: {creatorId}} = req;
     const departureDate = moment(`${date} ${departureTime}`);
     const returnDate = moment(`${date} ${returnTime}`);
 
@@ -120,7 +119,7 @@ router.post('/trip/:username', jsonBodyParser, (req, res) => {
             tripTime,
             seats,
             description,
-            creator: username
+            creator: {"_id":ObjectId(creatorId)}
         }))
         .then(trip => {
             res.json(success({trip}))
@@ -133,9 +132,9 @@ router.post('/trip/:username', jsonBodyParser, (req, res) => {
 /**
  * list user published trips
  */
-router.get('/trips/:username', (req, res) => {
-    const {params: {username}} = req;
-    Trip.find({creator: username})
+router.get('/trips/:creatorId', (req, res) => {
+    const {params: {creatorId}} = req;
+    Trip.find({creator: {"_id":ObjectId(creatorId)}})
         .then(trips => {
             res.json(success({trips}))
         })
@@ -146,20 +145,20 @@ router.get('/trips/:username', (req, res) => {
 /**
  * cancel trip
  */
-router.delete('/trip/:username/:id', jsonBodyParser, (req, res) => {
+router.delete('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
     const {body: {password}} = req;
-    const {params: {username, id}} = req;
+    const {params: {creatorId, tripId}} = req;
 
     Promise.resolve()
-        .then(() => User.findOne({username}))
+        .then(() => User.findOne({"_id":ObjectId(creatorId)}))
         .then(user => {
             if (user.password !== password) throw Error('wrong password');
 
-            return Trip.deleteOne({"_id": ObjectId(id)})
+            return Trip.deleteOne({"_id": ObjectId(tripId)})
 
         })
         .then(() => {
-            res.json(success(`The trip ${id} has been deleted`))
+            res.json(success(`The trip ${tripId} has been deleted`))
         })
         .catch(err => {
             res.json(fail(err.message))
@@ -170,16 +169,16 @@ router.delete('/trip/:username/:id', jsonBodyParser, (req, res) => {
 /**
  * Update trip
  */
-router.put('/trip/:username/:id', jsonBodyParser, (req, res) => {
+router.put('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
     const {body: {from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password}} = req;
-    const {params: {username, id}} = req;
+    const {params: {creatorId, tripId}} = req;
 
     Promise.resolve()
-        .then(() => User.findOne({username}))
+        .then(() => User.findOne({"_id":ObjectId(creatorId)}))
         .then(user => {
             if (user.password !== password) throw Error('wrong password');
 
-            return Trip.updateOne({"_id": ObjectId(id)}, {
+            return Trip.updateOne({"_id": ObjectId(tripId)}, {
                 from,
                 to,
                 date,
