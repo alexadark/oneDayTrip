@@ -1,10 +1,21 @@
 const mongoose = require('mongoose');
 
 const Comment = new mongoose.Schema({
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    user: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     date: Date,
-    comment: String
+    comment: String,
+
 });
+
+const Rating = new mongoose.Schema({
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    rating: {
+        type:Number,
+        min:1,
+        max:5
+    }
+})
 
 
 const User = new mongoose.Schema({
@@ -37,7 +48,7 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
-    rating: Array,
+    ratings: [Rating],
 
     comments: [Comment]
 });

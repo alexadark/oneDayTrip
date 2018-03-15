@@ -5,7 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const {success, fail} = require('./api-utils');
 const bodyParser = require('body-parser');
-const {User, Trip, Comment} = require('./models/index');
+const {User, Trip, Comment, Rating} = require('./models/index');
 const _ = require('lodash')
 
 const moment = require('moment');
@@ -257,18 +257,23 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
  * User rate other user
  */
 
-router.put('/user/rate/:ratedUserId/:username', jsonBodyParser, (req,res) => {
-    const {params: {ratedUserId, username}} = req;
+router.put('/user/rate/:ratedUserId/:userId', jsonBodyParser, (req,res) => {
+    const {params: {ratedUserId, userId}} = req;
     const {body: {rating}} = req;
     const ratedUser = {"_id": ObjectId(ratedUserId)}
+    const user = {"_id": ObjectId(userId)}
+    const ratingObj = {
+        user,
+        rating
+    }
 
 
 //TODO ratings must be by user
     Promise.resolve()
         .then((user) => User.findOne(ratedUser))
         .then((user) => {
-        if(!user.rating) user.rating = [];
-        user.rating.push(rating)
+        if(!user.ratings) user.ratings = [];
+        user.ratings.push(ratingObj)
             return user.save()
 
         })
@@ -284,6 +289,33 @@ router.put('/user/rate/:ratedUserId/:username', jsonBodyParser, (req,res) => {
 /**
  * user let comment to other user
  */
+
+router.put('/user/comment/:commentedUserId/:userId', jsonBodyParser, (req,res) => {
+    const {params: {commentedUserId, userId}} = req;
+    const {body: {comment}} = req;
+    const commentedUser = {"_id": ObjectId(commentedUserId)};
+    const user = {"_id": ObjectId(userId)};
+    const commentObj = {
+        user,
+        date: moment(),
+        comment
+    }
+console.log(commentObj)
+    Promise.resolve()
+        .then((user) => User.findOne(commentedUser))
+        .then((user) => {
+            if(!user.comments) user.comments = [];
+            user.comments.push(commentObj)
+            return user.save()
+        })
+        .then(() => {
+            res.json(success(commentObj))
+        })
+        .catch(err => {
+            res.json(fail(err.message))
+        })
+
+});
 
 app.use(cors());
 
