@@ -13,7 +13,7 @@ const Trip = mongoose.model('Trip', {
         minlength: 1,
         trim: true
     },
-    meetingpoint:{
+    meetingPoint:{
         type: String,
         trim: true,
     },
@@ -37,11 +37,11 @@ const Trip = mongoose.model('Trip', {
         type: Number,
         required:true,
     },
-    tripTime: Number,
+    tripTime: String,
     description: String,
-    creator: Objectid,
+    creator: String,
     passengers: Array
 
 });
 
-modules.export = Trip;
+module.exports = Trip;

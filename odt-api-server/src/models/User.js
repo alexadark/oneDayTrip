@@ -41,11 +41,11 @@ const User = mongoose.model('User', {
         max: 5
     },
     comments: {
-        userId: Objectid,
+        userId: String,
         date: Date,
         comment: String
     }
 
 });
 
-modules.export = User;
+module.exports = User;
