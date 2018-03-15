@@ -5,17 +5,15 @@ const Comment = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     date: Date,
     comment: String,
-
-});
-
-const Rating = new mongoose.Schema({
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     rating: {
         type:Number,
         min:1,
         max:5
     }
-})
+
+});
+
+
 
 
 const User = new mongoose.Schema({
@@ -48,8 +46,6 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
-    ratings: [Rating],
-
     comments: [Comment]
 });
 

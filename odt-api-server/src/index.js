@@ -135,16 +135,13 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
  */
 router.get('/trips/:creatorId', (req, res) => {
     const {params: {creatorId}} = req;
-    const creator = {"_id": ObjectId(creatorId)}
+
 //TODO to fix
     Promise.resolve()
-        .then(() => Trip.find({creator}))
+        .then(() => Trip.find({creator:ObjectId(creatorId)})
         .then(trips => {
             res.json(success({trips}))
-        })
-        .catch(err => {
-            res.json(fail(err.message))
-        })
+        }))
 
 
 });
@@ -260,54 +257,23 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
 
 
 /**
- * User rate other user
- */
-
-router.put('/user/rate/:ratedUserId/:userId', jsonBodyParser, (req, res) => {
-    const {params: {ratedUserId, userId}} = req;
-    const {body: {rating}} = req;
-    const ratedUser = {"_id": ObjectId(ratedUserId)}
-    const user = {"_id": ObjectId(userId)}
-    const ratingObj = {
-        user,
-        rating
-    }
-
-
-//TODO ratings must be by user
-    Promise.resolve()
-        .then((user) => User.findOne(ratedUser))
-        .then((user) => {
-            if (!user.ratings) user.ratings = [];
-            user.ratings.push(ratingObj)
-            return user.save()
-
-        })
-        .then(() => {
-            res.json(success())
-        })
-        .catch(err => {
-            res.json(fail(err.message))
-        })
-
-});
-
-/**
  * user let comment to other user
  */
 
 router.put('/user/comment/:commentedUserId/:userId', jsonBodyParser, (req, res) => {
     const {params: {commentedUserId, userId}} = req;
-    const {body: {comment}} = req;
+    const {body: {comment, rating}} = req;
     const commentedUser = {"_id": ObjectId(commentedUserId)};
     const user = {"_id": ObjectId(userId)};
     const commentObj = {
         user,
         date: moment(),
-        comment
+        comment,
+        rating
     }
     console.log(commentObj)
     Promise.resolve()
+        //TODO user cannot comment several times
         .then((user) => User.findOne(commentedUser))
         .then((user) => {
             if (!user.comments) user.comments = [];
