@@ -37,11 +37,8 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
-    rating: {
-        type: Number,
-        min: 0,
-        max: 5
-    },
+    rating: Array,
+
     comments: [Comment]
 });
 

@@ -257,16 +257,19 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
  * User rate other user
  */
 
-router.put('/user/rate/:ratedUserId/:ratingUserId', jsonBodyParser, (req,res) => {
-    const {params: {ratedUserId, ratingUserId}} = req;
+router.put('/user/rate/:ratedUserId/:username', jsonBodyParser, (req,res) => {
+    const {params: {ratedUserId, username}} = req;
     const {body: {rating}} = req;
     const ratedUser = {"_id": ObjectId(ratedUserId)}
-    const ratingUser = {"_id": ObjectId(ratingUserId)}
 
 
+//TODO ratings must be by user
     Promise.resolve()
         .then((user) => User.findOne(ratedUser))
         .then((user) => {
+        if(!user.rating) user.rating = [];
+        user.rating.push(rating)
+            return user.save()
 
         })
         .then(() => {
