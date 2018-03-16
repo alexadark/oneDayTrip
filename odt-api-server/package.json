@@ -2,8 +2,9 @@
   "name": "odt-api-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "start": "node .",
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec 'npm test'"
   },

@@ -5,7 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const {success, fail} = require('./api-utils');
 const bodyParser = require('body-parser');
-const {User, Trip, Comment, Rating} = require('./models/index');
+const {User, Trip, Comment} = require('./models/index');
 const _ = require('lodash')
 
 const moment = require('moment');
@@ -13,6 +13,7 @@ const ObjectId = require('mongodb').ObjectID;
 
 
 const port = process.env.PORT;
+const mongoUrl = process.env.MONGO_URL
 
 
 const cors = require('cors');
@@ -21,13 +22,15 @@ const mongo = {
     host: process.env.MONGO_HOST,
     port: process.env.MONGO_PORT,
     database: process.env.MONGO_DB,
+
 };
 
 
-mongoose.connect(`mongodb://${mongo.host}:${mongo.port}/${mongo.database}`);
+mongoose.connect(`mongodb://${mongoUrl}`);
 
 const app = express();
 const router = express.Router();
+app.use(cors());
 app.use('/api', router);
 
 const jsonBodyParser = bodyParser.json();
@@ -136,7 +139,6 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
 router.get('/trips/:creatorId', (req, res) => {
     const {params: {creatorId}} = req;
 
-//TODO to fix
     Promise.resolve()
         .then(() => Trip.find({creator:ObjectId(creatorId)})
         .then(trips => {
@@ -289,7 +291,8 @@ router.put('/user/comment/:commentedUserId/:userId', jsonBodyParser, (req, res) 
 
 });
 
-app.use(cors());
+
 
 
 app.listen(port, () => console.log(`ODT api running on port ${port}`));
+console.log(`MONGO_URL: ${mongoUrl}`)
