@@ -4,7 +4,7 @@ const api = {
     baseUrl : 'http://localhost:5000/api',
 
     call(method, path, body){
-        return axios.method(`${this.baseUrl}/${path}`, body)
+        return axios[method](`${this.baseUrl}/${path}`, body)
             .then(res => res.data.data)
     },
 

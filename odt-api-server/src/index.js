@@ -18,13 +18,6 @@ const mongoUrl = process.env.MONGO_URL
 
 const cors = require('cors');
 
-const mongo = {
-    host: process.env.MONGO_HOST,
-    port: process.env.MONGO_PORT,
-    database: process.env.MONGO_DB,
-
-};
-
 
 mongoose.connect(`mongodb://${mongoUrl}`);
 

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-// import api from 'odt-api-client'
-//TODO import api from node modules
+import api from '../api'
 
-import api from '../api.js'
 
 
 class SignUp extends Component {
@@ -84,7 +82,7 @@ class SignUp extends Component {
                     </div>
 
                     <div>
-                        <input type="text"
+                        <input type="submit"
                                className="uk-button uk-button-primary"
                                value="Submit"/>
                     </div>
