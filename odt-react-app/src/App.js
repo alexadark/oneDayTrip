@@ -19,7 +19,7 @@ class App extends Component {
                 <Header/>
                 <Switch>
                     <Route path="/" component={Home} exact={true}/>
-                    <Route path="/publish"  component={Publish}/>
+                    <Route path="/:username/publish"  component={Publish}/>
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
                     <Route path="/user-panel"  component={UserPanel}/>

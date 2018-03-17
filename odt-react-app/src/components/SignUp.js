@@ -16,10 +16,16 @@ class SignUp extends Component {
         }
     }
 
-    submit(){
+    register(){
        api.registerUser(this.state.name, this.state.surname, this.state.email, this.state.picture, this.state.username, this.state.password);
-       console.log('submitted')
+
+       this.setState({name : '', surname: '', email: '', picture: '', username: '', password: ''})
+
+
+
     }
+
+    //TODO refactor these functions
 
     keepName = name => this.setState({name});
     keepSurname = surname => this.setState({surname});
@@ -29,6 +35,8 @@ class SignUp extends Component {
     keepPassword = password => this.setState({password});
 
 
+
+
     render() {
         return (
             <div className="uk-container">
@@ -36,12 +44,13 @@ class SignUp extends Component {
                 <form data-uk-grid
                       onSubmit={e => {
                           e.preventDefault();
-                          this.submit();
+                          this.register();
                 }}>
                     <div className="uk-width-1-2@m">
                         <input type="text"
                                className="uk-input"
                                placeholder="Name"
+                               required="true"
                                onChange={e => this.keepName(e.target.value)}
                                value={this.state.name}/>
                     </div>
@@ -49,6 +58,7 @@ class SignUp extends Component {
                         <input type="text"
                                className="uk-input"
                                placeholder="Surname"
+                               required="true"
                                onChange={e => this.keepSurname(e.target.value)}
                                value={this.state.surname}/>
                     </div>
@@ -56,6 +66,7 @@ class SignUp extends Component {
                         <input type="text"
                                className="uk-input"
                                placeholder="Email"
+                               required="true"
                                onChange={e => this.keepEmail(e.target.value)}
                                value={this.state.email}/>
                     </div>
@@ -70,6 +81,7 @@ class SignUp extends Component {
                         <input type="text"
                                className="uk-input"
                                placeholder="Username"
+                               required="true"
                                onChange={e => this.keepUsername(e.target.value)}
                                value={this.state.username}/>
                     </div>
@@ -77,6 +89,7 @@ class SignUp extends Component {
                         <input type="text"
                                className="uk-input"
                                placeholder="Password"
+                               required="true"
                                onChange={e => this.keepPassword(e.target.value)}
                                value={this.state.password}/>
                     </div>
@@ -84,7 +97,7 @@ class SignUp extends Component {
                     <div>
                         <input type="submit"
                                className="uk-button uk-button-primary"
-                               value="Submit"/>
+                               value="Sign up!"/>
                     </div>
 
                 </form>

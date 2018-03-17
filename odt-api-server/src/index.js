@@ -35,15 +35,31 @@ router.post('/user', jsonBodyParser, (req, res) => {
 
     const {body: {name, surname, email, picture, username, password}} = req;
 
-    Promise.resolve()
-        .then(() => User.findOne({username})
+    User.findOne({username})
             .then(user => {
                 return User.create({name, surname, email, picture, username, password})
             })
             .then(username => res.json(success({username})))
             .catch(err => res.json(fail(err.message)))
-        )
+
 });
+
+/**
+ * Find user ID by username
+ */
+router.get('/user/:username', (req,res) =>{
+    const {username} = req.params
+     User.findOne({username})
+        .then(user => {
+            if (!user) throw Error('user does not exists')
+            return user._id
+        })
+        .then(userId => {
+            res.json(success(`ID for username ${username} = ${userId}`))
+
+        })
+        .catch(err => res.json(fail(err.message)))
+})
 
 /**
  * Delete user
@@ -52,8 +68,7 @@ router.delete('/user/:id', jsonBodyParser, (req, res) => {
     const {body: {password}} = req;
     const {params: {id}} = req;
 
-    Promise.resolve()
-        .then(() => User.findOne({"_id": ObjectId(id)}))
+    User.findOne({"_id": ObjectId(id)})
         .then(user => {
             if (!user) throw Error('user does not exists');
             if (user.password !== password) throw Error('wrong password');
@@ -77,8 +92,7 @@ router.put('/user/:id', jsonBodyParser, (req, res) => {
     const {body: {name, surname, email, picture, password, newPassword}} = req;
     const {params: {id}} = req;
 
-    Promise.resolve()
-        .then((() => User.findOne({"_id": ObjectId(id)})))
+    User.findOne({"_id": ObjectId(id)})
         .then(user => {
             if (!user) throw Error('user does not exists');
             if (user.password !== password) throw Error('wrong password');
@@ -104,8 +118,7 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
     const departureDate = moment(`${date} ${departureTime}`);
     const returnDate = moment(`${date} ${returnTime}`);
 
-    Promise.resolve()
-        .then(() => Trip.create({
+    Trip.create({
             from,
             to,
             meetingPoint,
@@ -117,7 +130,7 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
             seats,
             description,
             creator: {"_id": ObjectId(creatorId)}
-        }))
+        })
         .then(trip => {
             res.json(success({trip}))
         })
@@ -132,11 +145,10 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
 router.get('/trips/:creatorId', (req, res) => {
     const {params: {creatorId}} = req;
 
-    Promise.resolve()
-        .then(() => Trip.find({creator:ObjectId(creatorId)})
+    Trip.find({creator:ObjectId(creatorId)})
         .then(trips => {
             res.json(success({trips}))
-        }))
+        })
 
 
 });
@@ -148,8 +160,7 @@ router.delete('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
     const {body: {password}} = req;
     const {params: {creatorId, tripId}} = req;
 
-    Promise.resolve()
-        .then(() => User.findOne({"_id": ObjectId(creatorId)}))
+    User.findOne({"_id": ObjectId(creatorId)})
         .then(user => {
             if (user.password !== password) throw Error('wrong password');
 
@@ -172,8 +183,7 @@ router.put('/trip/:creatorId/:tripId', jsonBodyParser, (req, res) => {
     const {body: {from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password}} = req;
     const {params: {creatorId, tripId}} = req;
 
-    Promise.resolve()
-        .then(() => User.findOne({"_id": ObjectId(creatorId)}))
+    User.findOne({"_id": ObjectId(creatorId)})
         .then(user => {
             if (user.password !== password) throw Error('wrong password');
 
@@ -208,8 +218,7 @@ router.put('/trip/join/:tripId/:passengerId', (req, res) => {
     const {params: {tripId, passengerId}} = req;
 
 
-    Promise.resolve()
-        .then(() => Trip.findOne({"_id": ObjectId(tripId)}))
+    Trip.findOne({"_id": ObjectId(tripId)})
         .then(trip => {
             if (!trip.passengers) trip.passengers = [];
             //TODO error if a passenger is already on a trip
@@ -233,8 +242,7 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
     const {params: {tripId, passengerId}} = req;
     const passenger = {"_id": ObjectId(passengerId)}
 
-    Promise.resolve()
-        .then(() => Trip.findOne({"_id": ObjectId(tripId)}))
+   Trip.findOne({"_id": ObjectId(tripId)})
         .then(trip => {
             const passengersArray = trip.passengers
             const index = passengersArray.indexOf(passenger)

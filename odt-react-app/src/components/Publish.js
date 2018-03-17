@@ -3,18 +3,32 @@ import React, { Component } from 'react';
 class Publish extends Component {
     constructor(props){
         super(props)
+        this.state = {
+            creatorId: '',
+            from: '',
+            to: '',
+            date: '',
+            meetingPoint: '',
+            departureTime: '',
+            returnTime: '',
+            tripTime: '',
+            price: '',
+            distance: '',
+            seats:'',
+            description:''
+        }
     }
 
     render(){
         return (
             <div className="uk-container">
-                <h2 className="uk-text-center">Publish your Trip</h2>
+                <h2 className="uk-text-center">Publish your Trip for user {this.props.match.params.username}</h2>
                 <form  data-uk-grid>
-                    <div className="uk-width-1-2@m">
+                    <div className="uk-width-1-3@m">
                         <input type="text"
                                className="uk-input" placeholder="From"/>
                     </div>
-                    <div className="uk-width-1-2@m">
+                    <div className="uk-width-1-3@m">
                         <input type="text"
                                className="uk-input" placeholder="To"/>
                     </div>
@@ -32,7 +46,11 @@ class Publish extends Component {
                     </div>
                     <div className="uk-width-1-3@m">
                         <input type="text"
-                               className="uk-input" placeholder="Duration"/>
+                               className="uk-input" placeholder="Distance"/>
+                    </div>
+                    <div className="uk-width-1-3@m">
+                        <input type="text"
+                               className="uk-input" placeholder="Trip time"/>
                     </div>
                     <div className="uk-width-1-3@m">
                         <input type="text"
@@ -43,12 +61,12 @@ class Publish extends Component {
                                className="uk-input" placeholder="Available seats"/>
                     </div>
                     <div className="uk-width-1-1">
-                        <input type="textarea"
-                               className="uk-input" placeholder="Descriptions"/>
+                        <textarea rows="5"
+                               className="uk-textarea" placeholder="Description"/>
                     </div>
                     <div>
-                        <input type="text"
-                               className="uk-button uk-button-primary" value="Submit Trip"/>
+                        <input type="submit"
+                               className="uk-button uk-button-primary" value="Publish Trip"/>
                     </div>
 
                 </form>
