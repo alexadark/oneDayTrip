@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import api from '../api'
 
 
-
 class SignUp extends Component {
     constructor() {
         super()
@@ -16,12 +15,12 @@ class SignUp extends Component {
         }
     }
 
-    register(){
-       api.registerUser(this.state.name, this.state.surname, this.state.email, this.state.picture, this.state.username, this.state.password);
+    register() {
+        const {name, surname,email, picture, username, password} = this.state
 
-       this.setState({name : '', surname: '', email: '', picture: '', username: '', password: ''})
+        api.registerUser(name, surname,email, picture, username, password)
 
-
+            .then(() => this.setState({name: '', surname: '', email: '', picture: '', username: '', password: ''}))
 
     }
 
@@ -35,8 +34,6 @@ class SignUp extends Component {
     keepPassword = password => this.setState({password});
 
 
-
-
     render() {
         return (
             <div className="uk-container">
@@ -45,7 +42,7 @@ class SignUp extends Component {
                       onSubmit={e => {
                           e.preventDefault();
                           this.register();
-                }}>
+                      }}>
                     <div className="uk-width-1-2@m">
                         <input type="text"
                                className="uk-input"
@@ -89,7 +86,7 @@ class SignUp extends Component {
                         <input type="text"
                                className="uk-input"
                                placeholder="Password"
-                               required="true"
+                               // required="true"
                                onChange={e => this.keepPassword(e.target.value)}
                                value={this.state.password}/>
                     </div>
