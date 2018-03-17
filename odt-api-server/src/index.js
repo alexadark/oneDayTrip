@@ -49,14 +49,15 @@ router.post('/user', jsonBodyParser, (req, res) => {
  */
 router.get('/user/:username', (req,res) =>{
     const {username} = req.params
+
      User.findOne({username})
         .then(user => {
             if (!user) throw Error('user does not exists')
             return user._id
         })
-        .then(userId => {
-            res.json(success(`ID for username ${username} = ${userId}`))
 
+        .then(userId => {
+            res.json(success(userId))
         })
         .catch(err => res.json(fail(err.message)))
 })

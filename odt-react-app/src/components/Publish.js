@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../api'
 
 class Publish extends Component {
     constructor(props){
@@ -17,6 +18,12 @@ class Publish extends Component {
             seats:'',
             description:''
         }
+    }
+
+    componentDidMount(){
+        api.getUsernameId(this.props.match.params.username)
+            .then((creatorId) => this.setState({creatorId}))
+
     }
 
     render(){
