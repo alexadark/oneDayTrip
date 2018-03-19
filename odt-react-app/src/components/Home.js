@@ -6,8 +6,8 @@ import TripListItem from './TripListItem'
 
 
 class Home extends Component{
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             location:'',
@@ -18,7 +18,7 @@ class Home extends Component{
     searchTrips = () =>{
         api.listTrips(this.state.location)
             .then((trips) => {
-                this.setState({trips})
+                this.setState({trips, location: ''})
 
             })
     }
@@ -77,9 +77,8 @@ class Home extends Component{
                     <h2 className="uk-text-center">This week in your area</h2>
 
                     <div className="trip-list" >
-                        <TripListItem/>
-                        <TripListItem/>
-                        <TripListItem/>
+                        {this.state.trips.map(trip => <TripListItem trip={trip}/>)}
+
                     </div>
                 </div>
             </div>

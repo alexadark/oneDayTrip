@@ -63,6 +63,21 @@ router.get('/user/:username', (req,res) =>{
 })
 
 /**
+ * Find user by ID
+ */
+router.get('/userid/:id', (req,res)=>{
+    const {id} = req.params
+
+    User.findOne({"_id": ObjectId(id)})
+        .then(user => {
+            return user
+        })
+        .then(user => {
+            res.json(success(user))
+        })
+})
+
+/**
  * Delete user
  */
 router.delete('/user/:id', jsonBodyParser, (req, res) => {

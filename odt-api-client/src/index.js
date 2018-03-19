@@ -18,6 +18,10 @@ const api = {
         return this.call('get',`user/${username}`)
     },
 
+    getUserFromId(id){
+        return this.call('get',`userid/${id}`)
+    },
+
 
     deleteUser(id, password){
        return this.call('delete',`user/${id}`, {password})
