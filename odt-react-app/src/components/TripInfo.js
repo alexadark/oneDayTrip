@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import api from '../api'
 
+
 //TODO pass name of creator
+
+
 
 class TripInfo extends Component {
     constructor(props){
