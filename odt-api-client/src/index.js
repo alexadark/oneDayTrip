@@ -22,6 +22,9 @@ const api = {
         return this.call('get',`userid/${id}`)
     },
 
+    getTripFromId(id){
+        return this.call('get',`trip/${id}`)
+    },
 
     deleteUser(id, password){
        return this.call('delete',`user/${id}`, {password})

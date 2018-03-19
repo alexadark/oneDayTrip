@@ -4,6 +4,13 @@ import TripList from './TripList'
 import api from '../api'
 import TripListItem from './TripListItem'
 
+//TODO list by date
+//TODO send location to url
+//TODO separate this component in several components: Search + TripList (problem passing data from one to another)
+//TODO put date and location into the title: This week ...
+
+//TODO geolocalize and show trips for the next 7 days
+
 
 class Home extends Component{
     constructor(props) {

@@ -78,6 +78,22 @@ router.get('/userid/:id', (req,res)=>{
 })
 
 /**
+ * Find Trip by ID
+ */
+
+router.get('/trip/:id', (req,res)=>{
+    const {id} = req.params
+
+    Trip.findOne({"_id": ObjectId(id)})
+        .then(trip => {
+            return trip
+        })
+        .then(trip => {
+            res.json(success(trip))
+        })
+})
+
+/**
  * Delete user
  */
 router.delete('/user/:id', jsonBodyParser, (req, res) => {

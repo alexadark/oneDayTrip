@@ -25,7 +25,7 @@ class App extends Component {
                     {/*<Route   component={NotFoundPage}/>*/}
                     <Route path="/user-panel"  component={UserPanel}/>
                     <Route path="/user-profile"  component={UserProfile}/>
-                    <Route path="/trip-info"  component={TripInfo}/>
+                    <Route path="/trip-info/:tripId"  component={TripInfo}/>
                     {/*<Route path="/available-trips/:destination"  component={TripList}/>*/}
                 </Switch>
             </div>
