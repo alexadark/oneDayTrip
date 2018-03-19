@@ -20,6 +20,7 @@ class TripListItem extends Component {
 
     render(){
         const date = this.props.trip.departureDate.slice(0,10)
+        const passengers = this.props.trip.passengers.length
         return (
             <div className="trip-list-item uk-card uk-card-default uk-card-body uk-margin-bottom">
                 <div className="uk-flex uk-flex-between">
@@ -33,10 +34,10 @@ class TripListItem extends Component {
                     </div>
                     <div className="date-place ">
                         <p>Price:{this.props.trip.price}E</p>
-                        <p>Available seats: {this.props.trip.seats}</p>
+                        <p>Available seats: {this.props.trip.seats - passengers}  </p>
                     </div>
                     <div className="">
-                    <NavLink className="uk-button uk-button-primary " to="/trip-info">
+                    <NavLink className="uk-button uk-button-primary " to={`/trip-info/${this.props.trip._id}`}>
                         View details and book
                     </NavLink>
                     </div>
