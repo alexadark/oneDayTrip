@@ -141,6 +141,24 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
 });
 
 /**
+ * List trips by destination and date
+ */
+router.get('/available-trips/:destination/', (req,res) =>{
+    const {params: {destination}} = req
+    Trip.find({from:destination})
+        .then(trips =>{
+            if(!trips) throw Error('there is no trips with these criterias')
+            return trips
+        })
+        .then((trips) => {
+            res.json(success(trips))
+        })
+        .catch(err => {
+            res.json(fail(err.message))
+        })
+})
+
+/**
  * list user published trips
  */
 router.get('/trips/:creatorId', (req, res) => {
@@ -148,7 +166,7 @@ router.get('/trips/:creatorId', (req, res) => {
 
     Trip.find({creator:ObjectId(creatorId)})
         .then(trips => {
-            res.json(success({trips}))
+            res.json(success(trips))
         })
 
 

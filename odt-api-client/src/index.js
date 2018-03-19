@@ -40,6 +40,10 @@ const api = {
         return this.call('get',`trip/${creatorId}`)
     },
 
+    listTrips(destination){
+        return this.call('get',`available-trips/${destination}`)
+    },
+
 
 
     cancelTrip(creatorId, password){

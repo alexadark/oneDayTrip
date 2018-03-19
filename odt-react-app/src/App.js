@@ -8,6 +8,7 @@ import Home from './components/Home';
 import UserPanel from './components/UserPanel';
 import UserProfile from './components/UserProfile';
 import TripInfo from './components/TripInfo';
+import TripList from './components/TripList';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ class App extends Component {
                     <Route path="/user-panel"  component={UserPanel}/>
                     <Route path="/user-profile"  component={UserProfile}/>
                     <Route path="/trip-info"  component={TripInfo}/>
+                    {/*<Route path="/available-trips/:destination"  component={TripList}/>*/}
                 </Switch>
             </div>
 

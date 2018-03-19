@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import api from '../api'
+import {Redirect} from 'react-router-dom';
 
 
 class SignUp extends Component {
@@ -19,6 +20,7 @@ class SignUp extends Component {
         const {name, surname,email, picture, username, password} = this.state
 
         api.registerUser(name, surname,email, picture, username, password)
+
 
             .then(() => this.setState({name: '', surname: '', email: '', picture: '', username: '', password: ''}))
 
