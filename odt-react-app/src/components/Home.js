@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
-import Search from './Search';
 import TripList from './TripList'
-import api from '../api'
-import TripListItem from './TripListItem'
+import { withRouter, Route } from "react-router-dom"
 
 //TODO list by date
 //TODO send location to url
@@ -20,17 +18,14 @@ class Home extends Component{
             location:'',
             arrival:'',
             departure: '',
-            trips: []
+  
 
         }
     }
     searchTrips = () =>{
         const {location, arrival, departure} = this.state
-        api.listTrips(location,arrival,departure)
-            .then((trips) => {
-                this.setState({trips, location: '', arrival:'', departure:''})
-
-            })
+        //Send state in url parameters
+        this.props.history.push(`home/${location}/${arrival}/${departure}`)
     }
 
     keepLocation = location => this.setState({location})
@@ -39,69 +34,42 @@ class Home extends Component{
 
     render(){
         const trips = this.state.trips
-        return (
-            <div>
-
-                <div className="search">
-                    <div className="hero uk-background-cover uk-background-no-repeat uk-light">
-                        <div className="uk-container uk-padding-large">
-                            <div className="hero-content uk-align-center">
-                                <h2 className="hero-text uk-text-center">Explore the region</h2>
-                            </div>
-                            <form data-uk-grid
-                                  onSubmit={e => {
-                                      e.preventDefault()
-                                      this.searchTrips()
-                                  }
-                                  }>
-                                <div className="uk-width-1-4">
-                                    <input type="text"
-                                           className="uk-input"
-                                           placeholder="Leaving from..."
-                                           onChange={e => this.keepLocation(e.target.value)}
-                                           value={this.state.location}
-                                    />
-                                </div>
-                                <div className="uk-width-1-4">
-                                    <input type="date"
-                                           className="uk-input"
-                                           placeholder="from date"
-                                           onChange={e => this.keepArrival(e.target.value)}
-                                           value={this.state.arrival}
-                                    />
-                                </div>
-                                <div className="uk-width-1-4">
-                                    <input type="date"
-                                           className="uk-input"
-                                           placeholder="to date"
-                                           onChange={e => this.keepDeparture(e.target.value)}
-                                           value={this.state.departure}/>
-                                </div>
-                                <div className="uk-width-1-6">
-                                    <input type="submit"
-                                           className="uk-button uk-button-primary"
-                                           value="Submit"/>
-                                </div>
-
-
-                            </form>
-
-                        </div>
+        return <div>
+            <div className="search">
+              <div className="hero uk-background-cover uk-background-no-repeat uk-light">
+                <div className="uk-container uk-padding-large">
+                  <div className="hero-content uk-align-center">
+                    <h2 className="hero-text uk-text-center">
+                      Explore the region
+                    </h2>
+                  </div>
+                  <form data-uk-grid onSubmit={e => {
+                      e.preventDefault();
+                      this.searchTrips();
+                    }}>
+                    <div className="uk-width-1-4">
+                      <input type="text" className="uk-input" placeholder="Leaving from..." onChange={e => this.keepLocation(e.target.value)} value={this.state.location} />
                     </div>
-                </div>
-
-
-                <div className="uk-container uk-padding">
-                    <h2 className="uk-text-center">This week in your area</h2>
-
-                    <div className="trip-list" >
-                        {this.state.trips.map(trip => <TripListItem trip={trip}/>)}
-
+                    <div className="uk-width-1-4">
+                      <input type="date" className="uk-input" placeholder="from date" onChange={e => this.keepArrival(e.target.value)} value={this.state.arrival} />
                     </div>
+                    <div className="uk-width-1-4">
+                      <input type="date" className="uk-input" placeholder="to date" onChange={e => this.keepDeparture(e.target.value)} value={this.state.departure} />
+                    </div>
+                    <div className="uk-width-1-6">
+                      <input type="submit" className="uk-button uk-button-primary" value="Submit" />
+                    </div>
+                  </form>
                 </div>
+              </div>
             </div>
-        )
+
+            <div className="uk-container uk-padding">
+              <h2 className="uk-text-center">This week in your area</h2>
+            </div>
+            <Route path={`/home/:location/:arrival/:departure`} component={TripList} />
+          </div>;
     }
 }
 
-export default Home;
+export default withRouter(Home);
