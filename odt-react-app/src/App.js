@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Header from './components/Header';
 import Publish from './components/Publish';
 import SignUp from './components/SignUp';
@@ -19,7 +19,8 @@ class App extends Component {
             <div>
                 <Header/>
                 <Switch>
-                    <Route path="/" component={Home} exact={true}/>
+                    <Route path="/" exact={true} render={() => (<Redirect to="/home" />)} />
+                    <Route path="/home" component={Home} />
                     <Route path="/:username/publish"  component={Publish}/>
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
