@@ -48,7 +48,7 @@ const api = {
 
 
     listUserPublishedTrips(creatorId){
-        return this.call('get',`trip/${creatorId}`)
+        return this.call('get',`trips/${creatorId}`)
     },
 
     listTrips(destination,arrival,departure){

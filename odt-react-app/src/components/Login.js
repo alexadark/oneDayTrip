@@ -32,8 +32,8 @@ class Login extends Component {
         </button>
         <div id="login" data-uk-modal>
           <div className="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default" type="button" uk-close />
-            <h2 class="uk-modal-title">Login</h2>
+            <button className="uk-modal-close-default" type="button" uk-close />
+            <h2 className="uk-modal-title">Login</h2>
             <form data-uk-grid onSubmit={e => {
                 e.preventDefault();
                 this.login();
