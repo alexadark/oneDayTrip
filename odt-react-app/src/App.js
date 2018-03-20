@@ -9,7 +9,7 @@ import UserPanel from './components/UserPanel';
 import UserProfile from './components/UserProfile';
 import TripInfo from './components/TripInfo';
 import TripList from './components/TripList';
-import Login from "./components/Login";
+
 
 import './App.css';
 
@@ -25,10 +25,10 @@ class App extends Component {
                     <Route path="/:username/publish"  component={Publish}/>
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
-                    <Route path="/user-panel"  component={UserPanel}/>
-                    <Route path="/user-profile"  component={UserProfile}/>
+                    <Route path="/user-panel/:username"  component={UserPanel}/>
+                    <Route path="/user-profile/:username"  component={UserProfile}/>
                     <Route path="/trip-info/:tripId"  component={TripInfo}/>
-                    <Route path="/login"  component={Login}/>
+                    
 
                 </Switch>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import api from "../api";
 
 class Login extends Component {
@@ -13,9 +14,10 @@ class Login extends Component {
 
   login = ()=> {
     const {username, password}= this.state
-   const loggedIn = api.login(username, password)
+    api.login(username, password)
    .then(user => {
      this.setState({ user, username: "", password: "" });
+     this.props.history.push(`user-panel/${this.state.user.username}`);
    })
   }
 
@@ -24,10 +26,10 @@ class Login extends Component {
 
   render() {
     return <div className="uk-display-inline">
+       
         <button className="uk-button uk-button-small uk-button-primary uk-margin-small-right" data-uk-toggle="target: #login">
           Login
         </button>
-
         <div id="login" data-uk-modal>
           <div className="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default" type="button" uk-close />
@@ -52,4 +54,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
