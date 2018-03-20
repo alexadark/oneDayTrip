@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import TripList from './TripList'
 import { withRouter, Route } from "react-router-dom"
 
-//TODO list by date
-//TODO send location to url
-//TODO separate this component in several components: Search + TripList (problem passing data from one to another)
+//TODO clean search form and url for new search
 //TODO put date and location into the title: This week ...
 
 //TODO geolocalize and show trips for the next 7 days
