@@ -45,6 +45,28 @@ router.post('/user', jsonBodyParser, (req, res) => {
 });
 
 /**
+ * Login
+ */
+
+ router.post('/login', jsonBodyParser, (req,res) =>{
+     const {body: {username, password}} = req
+     User.findOne({ username })
+       .then(user => {
+         if (!user) throw Error("user does not exists");
+         if (user.password !== password) throw Error("wrong password");
+         return user
+       })
+    
+       .then((user) => {
+         res.json(success(user));
+       })
+       .catch(err => {
+         res.json(fail(err.message));
+       });
+ 
+})
+
+/**
  * Find user ID by username
  */
 router.get('/user/:username', (req,res) =>{

@@ -1,5 +1,6 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom'
+import Login  from "./Login";
 
 const Header = () => (
   <header className="uk-padding-small">
@@ -29,13 +30,7 @@ const Header = () => (
         >
           User Panel
         </NavLink>
-        <NavLink
-          className="uk-button uk-button-small uk-button-primary uk-margin-small-right"
-          to="/login"
-          activeClassName="is-active"
-        >
-         Login
-        </NavLink>
+        <Login/>
       </nav>
     </div>
   </header>

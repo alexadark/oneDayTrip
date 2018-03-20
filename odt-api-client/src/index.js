@@ -12,7 +12,11 @@ const api = {
     registerUser(name, surname, email, picture, username, password) {
         return this.call('post', 'user', { name, surname, email, picture, username, password })
     },
-
+    
+    login(username, password){
+        return this.call('post', 'login', {username, password})
+        
+    },
 
     getUsernameId(username){
         return this.call('get',`user/${username}`)

@@ -22,7 +22,7 @@ componentDidMount(){
 }
 
     render() {
-        return <div className="trip-list">
+        return <div className="trip-list uk-container">
             {this.state.trips.map((trip, index) => <TripListItem trip={trip} key={index}/>)}
           </div>;
     }
