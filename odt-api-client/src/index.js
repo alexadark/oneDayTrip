@@ -47,8 +47,8 @@ const api = {
         return this.call('get',`trip/${creatorId}`)
     },
 
-    listTrips(destination){
-        return this.call('get',`available-trips/${destination}`)
+    listTrips(destination,arrival,departure){
+        return this.call('get',`available-trips/${destination}/${arrival}/${departure}`)
     },
 
 

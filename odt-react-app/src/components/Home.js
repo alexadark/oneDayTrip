@@ -18,21 +18,27 @@ class Home extends Component{
 
         this.state = {
             location:'',
+            arrival:'',
+            departure: '',
             trips: []
 
         }
     }
     searchTrips = () =>{
-        api.listTrips(this.state.location)
+        const {location, arrival, departure} = this.state
+        api.listTrips(location,arrival,departure)
             .then((trips) => {
-                this.setState({trips, location: ''})
+                this.setState({trips, location: '', arrival:'', departure:''})
 
             })
     }
 
     keepLocation = location => this.setState({location})
+    keepArrival = arrival => this.setState({arrival})
+    keepDeparture = departure => this.setState({departure})
 
     render(){
+        const trips = this.state.trips
         return (
             <div>
 
@@ -59,12 +65,17 @@ class Home extends Component{
                                 <div className="uk-width-1-4">
                                     <input type="date"
                                            className="uk-input"
-                                           placeholder="from date"/>
+                                           placeholder="from date"
+                                           onChange={e => this.keepArrival(e.target.value)}
+                                           value={this.state.arrival}
+                                    />
                                 </div>
                                 <div className="uk-width-1-4">
                                     <input type="date"
                                            className="uk-input"
-                                           placeholder="to date"/>
+                                           placeholder="to date"
+                                           onChange={e => this.keepDeparture(e.target.value)}
+                                           value={this.state.departure}/>
                                 </div>
                                 <div className="uk-width-1-6">
                                     <input type="submit"

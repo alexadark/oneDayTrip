@@ -147,8 +147,8 @@ router.put('/user/:id', jsonBodyParser, (req, res) => {
 router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
     const {body: {from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description}} = req;
     const {params: {creatorId}} = req;
-    const departureDate = moment(`${date} ${departureTime}`);
-    const returnDate = moment(`${date} ${returnTime}`);
+    const departureDate = moment(`${date} ${departureTime}`).toDate();
+    const returnDate = moment(`${date} ${returnTime}`).toDate();
 
     Trip.create({
             from,
@@ -174,9 +174,15 @@ router.post('/trip/:creatorId', jsonBodyParser, (req, res) => {
 /**
  * List trips by destination and date
  */
-router.get('/available-trips/:destination/', (req,res) =>{
-    const {params: {destination}} = req
-    Trip.find({from:destination})
+router.get('/available-trips/:destination/:arrival/:departure', (req,res) =>{
+    const {params: {destination, arrival,departure}} = req
+    Trip.find({
+        from:destination,
+        departureDate:{
+            $gte: moment(arrival).toDate(),
+            $lte: moment(departure).toDate()
+        }
+    })
         .then(trips =>{
             if(!trips) throw Error('there is no trips with these criterias')
             return trips
