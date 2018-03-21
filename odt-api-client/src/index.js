@@ -51,6 +51,10 @@ const api = {
         return this.call('get',`trips/${creatorId}`)
     },
 
+    listUserBookedTrips(userId){
+        return this.call('get',`booked-trips/${userId}`)
+    },
+
     listTrips(destination,arrival,departure){
         return this.call('get',`available-trips/${destination}/${arrival}/${departure}`)
     },

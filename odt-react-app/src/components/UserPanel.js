@@ -30,9 +30,6 @@ class UserPanel extends Component {
           <button className="uk-button uk-button-primary uk-button-small  uk-margin-right">
             Delete Profile
           </button>
-          <button className="uk-button uk-button-primary uk-button-small  uk-margin-right">
-            change password
-          </button>
           <NavLink to="/user-profile">
             <button className="uk-button uk-button-primary uk-button-small uk-margin-right">
               see my reviews

@@ -47,7 +47,7 @@ class Home extends Component{
                       this.searchTrips();
                     }}>
                     <div className="uk-width-1-4">
-                      <input type="text" className="uk-input" placeholder="Leaving from..." onChange={e => this.keepLocation(e.target.value)} value={this.state.location} />
+                      <input type="text" className="uk-input" placeholder="Leaving from..." onChange={e => this.keepLocation(e.target.value.toLowerCase())} value={this.state.location} />
                     </div>
                     <div className="uk-width-1-4">
                       <input type="date" className="uk-input" placeholder="from date" onChange={e => this.keepArrival(e.target.value)} value={this.state.arrival} />

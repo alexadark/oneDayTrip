@@ -221,7 +221,7 @@ router.get('/available-trips/:destination/:arrival/:departure', (req,res) =>{
  * list user published trips
  */
 router.get('/trips/:creatorId', (req, res) => {
-    const {params: {creatorId}} = req;
+    const {params: {creatorId}} = req
 
     Trip.find({creator:ObjectId(creatorId)})
         .then(trips => {
@@ -230,6 +230,20 @@ router.get('/trips/:creatorId', (req, res) => {
 
 
 });
+
+/**
+ * List user booked trips
+ */
+
+router.get('/booked-trips/:userId', (req,res) => {
+    const {params: {userId}} = req
+
+    Trip.find({passengers: {"_id": ObjectId(userId)}})
+        .then(trips => {
+            res.json(success(trips))
+        })
+
+})
 
 /**
  * cancel trip

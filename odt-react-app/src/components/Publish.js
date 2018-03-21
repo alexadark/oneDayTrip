@@ -63,7 +63,7 @@ class Publish extends Component {
                         <input type="text"
                                className="uk-input" placeholder="From"
                                required="true"
-                               onChange={e => this.keepFrom(e.target.value)}
+                               onChange={e => this.keepFrom(e.target.value.toLowerCase())}
                                value={this.state.from}/>
                     </div>
                     <div className="uk-width-1-3@m">
