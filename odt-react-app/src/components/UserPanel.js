@@ -24,7 +24,7 @@ class UserPanel extends Component {
   render() {
     return (
       <div className="uk-container">
-        <h2 className="uk-text-center">Hello {this.props.match.params.username}</h2>
+        <h2 className="uk-text-center">Hello {this.state.user.name}</h2>
         <div className="user-buttons uk-flex">
          <UpdateUser user = {this.state.user}  />
           <button className="uk-button uk-button-primary uk-button-small  uk-margin-right">
@@ -41,8 +41,8 @@ class UserPanel extends Component {
           className="user-panels uk-margin-large-top uk-child-width-1-2@m"
           data-uk-grid
         >
-          <UserPublishedTrips />
-          <UserBookedTrips />
+          <UserPublishedTrips user={this.state.user} />
+          <UserBookedTrips user={this.state.user} />
         </div>
       </div>
     );

@@ -12,8 +12,8 @@ class UserPublishedTrips extends Component {
         trips: []
     };
   }
-  componentDidMount() {
-    
+  componentDidMount =() => {
+
      api
        .getUsernameId(this.props.match.params.username)
        .then(creatorId => {
@@ -21,9 +21,15 @@ class UserPublishedTrips extends Component {
               .listUserPublishedTrips(creatorId)
               .then(trips => {
                 this.setState({ trips });
-                
+
               });
         })
+     //  api
+     //      .listUserPublishedTrips(this.props.user._id)
+     //      .then(trips => {
+     //          this.setState({ trips });
+     //
+     //      })
       
    
   }
