@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import api from "../api";
 
+ //TODO being able to login from any page
+//TODO pass the state user to parent component to be able to have it available anywhere when logged in
+//TODO logged out button when logged in
+//TODO close login modal after login
+
 class Login extends Component {
   constructor(props) {
     super(props);

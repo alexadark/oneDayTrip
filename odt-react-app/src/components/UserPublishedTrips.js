@@ -17,11 +17,9 @@ class UserPublishedTrips extends Component {
      api
        .getUsernameId(this.props.match.params.username)
        .then(creatorId => {
-           console.log(creatorId)
             api
               .listUserPublishedTrips(creatorId)
               .then(trips => {
-                  console.log(trips);
                 this.setState({ trips });
                 
               });
