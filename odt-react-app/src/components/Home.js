@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import TripList from './TripList'
+import api from '../api'
 import { withRouter, Route } from "react-router-dom"
 
 
@@ -21,6 +22,17 @@ class Home extends Component{
 
         }
     }
+
+    // componentDidMount(){
+    //     navigator.geolocation.getCurrentPosition(position => {
+    //         const lat = position.coords.latitude
+    //         const long = position.coords.longitude
+    //
+    //         api.geoLocalize(lat,long)
+    //             .then(location => this.setState({location}))
+    //     })
+    //
+    // }
     searchTrips = () =>{
         const {location, arrival, departure} = this.state
         //Send state in url parameters

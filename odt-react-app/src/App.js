@@ -14,11 +14,25 @@ import TripList from './components/TripList';
 import './App.css';
 
 class App extends Component {
+
+    constructor(props){
+        super(props)
+        this.state={
+            user:''
+        }
+    }
+
+    handler=(user)=>{
+        console.log('pop')
+        console.log(user)
+        // this.setState({user})
+    }
+
   render() {
     return (
         <BrowserRouter>
             <div>
-                <Header/>
+                <Header handler={this.handler}/>
                 <Switch>
                     <Route path="/" exact={true} render={() => (<Redirect to="/home" />)} />
                     <Route path="/home" component={Home} />

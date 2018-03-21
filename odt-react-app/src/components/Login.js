@@ -22,11 +22,15 @@ class Login extends Component {
         const {username, password} = this.state
         api.login(username, password)
             .then(user => {
-                this.setState({user, username: "", password: "", loggedIn:true});
-                this.props.history.push(`user-panel/${this.state.user.username}`);
+                this.setState({user, username: "", password: "", loggedIn:true})
+                this.props.history.push(`user-panel/${this.state.user.username}`)
+                // this.props.handler(this.state.user)
+
             })
     }
-
+    componentWillReceiveProps(){
+        console.log(this.props)
+    }
     keepUsername = username => this.setState({username});
     keepPassword = password => this.setState({password});
 
@@ -38,6 +42,7 @@ class Login extends Component {
                     data-uk-toggle="target: #login">
                 Login
             </button>
+            <button onClick={this.props.handler(this.state)}>jeje</button>
             <div id="login"
                  data-uk-modal>
                 <div className="uk-modal-dialog uk-modal-body">
@@ -72,7 +77,7 @@ class Login extends Component {
                     </form>
                 </div>
             </div>
-        </div>;
+        </div>
     }
 }
 
