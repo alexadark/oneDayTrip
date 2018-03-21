@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import UpdateTrip from './UpdateTrip'
+import CancelTrip from './CancelTrip'
 
 
 class PublishedTripItem extends Component {
@@ -21,17 +23,13 @@ class PublishedTripItem extends Component {
                   {seats > 0 ? `${seats} seats available` : "fully booked"}
                 </div>
                 <div className="buttons">
-                  <button className="uk-button uk-button-small uk-button-primary uk-margin-small-bottom">
+                 <UpdateTrip trip={this.props.trip}/>
+                  <br />
+                  <button className="uk-button uk-button-small uk-margin-small-bottom uk-button-primary ">
                     View Trip
                   </button>
                   <br />
-                  <button className="uk-button uk-button-small uk-margin-small-bottom uk-button-primary ">
-                    Edit Trip
-                  </button>
-                  <br />
-                  <button className="uk-button uk-button-small uk-margin-small-bottom uk-button-primary ">
-                    Cancel Trip
-                  </button>
+                  <CancelTrip/>
                   <br />
                 </div>
               </div>
