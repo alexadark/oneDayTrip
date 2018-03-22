@@ -22,7 +22,7 @@ class Publish extends Component {
 
     componentDidMount(){
         api.getUsernameId(this.props.match.params.username)
-            .then((creatorId) => this.setState({creatorId}))
+            .then((res) => this.setState({creatorId: res.data}))
 
     }
 

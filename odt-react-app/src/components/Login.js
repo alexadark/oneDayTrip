@@ -21,6 +21,7 @@ class Login extends Component {
     login = () => {
         const {username, password} = this.state
         api.login(username, password)
+            .then(res => res.data)
             .then(user => {
                 this.setState({user, username: "", password: "", loggedIn:true})
                 this.props.history.push(`user-panel/${this.state.user.username}`)

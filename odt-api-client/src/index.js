@@ -5,7 +5,8 @@ const api = {
 
     call(method, path, body){
         return axios[method](`${this.baseUrl}/${path}`, body)
-            .then(res => res.data.data)
+            // .then(res => res.data)
+            .then(({ data }) => data)
     },
 
 

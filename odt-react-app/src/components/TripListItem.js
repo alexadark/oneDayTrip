@@ -13,7 +13,7 @@ class TripListItem extends Component {
 
     componentDidMount(){
         api.getUserFromId(this.props.trip.creator)
-            .then((creator) => this.setState({creator}))
+            .then((res) => this.setState({creator: res.data}))
 
     }
 

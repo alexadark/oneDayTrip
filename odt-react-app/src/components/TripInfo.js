@@ -20,7 +20,7 @@ class TripInfo extends Component {
 
     componentDidMount(){
         api.getTripFromId(this.props.match.params.tripId)
-            .then((trip) => this.setState({trip}))
+            .then((res) => this.setState({trip: res.data}))
 
 
 

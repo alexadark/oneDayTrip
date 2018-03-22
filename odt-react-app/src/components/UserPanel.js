@@ -17,8 +17,9 @@ class UserPanel extends Component {
   componentDidMount() {
     api
       .getUsernameId(this.props.match.params.username)
+        .then(res => res.data)
       .then(userId => api.getUserFromId(userId))
-        .then(user => this.setState({user}));
+        .then(res => this.setState({user: res.data}));
   }
 
   render() {
