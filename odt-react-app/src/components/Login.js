@@ -13,19 +13,17 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            user: "",
-            loggedIn: false
-        };
+
+        }
     }
 
     login = () => {
         const {username, password} = this.state
         api.login(username, password)
-            .then(res => res.data)
-            .then(user => {
-                this.setState({user, username: "", password: "", loggedIn:true})
-                this.props.history.push(`user-panel/${this.state.user.username}`)
-                // this.props.handler(this.state.user)
+            .then(res => {
+                this.props.onUserLoggedIn(res.data.id, username)
+                this.props.history.push(`/user-panel/${username}`)
+               
 
             })
     }
@@ -43,7 +41,6 @@ class Login extends Component {
                     data-uk-toggle="target: #login">
                 Login
             </button>
-            <button onClick={this.props.handler(this.state)}>jeje</button>
             <div id="login"
                  data-uk-modal>
                 <div className="uk-modal-dialog uk-modal-body">

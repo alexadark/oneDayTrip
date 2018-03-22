@@ -3,6 +3,9 @@ import {NavLink} from 'react-router-dom'
 import Login  from "./Login";
 
 class Header extends Component{
+  constructor(props){
+    super(props)
+  }
 
   render(){
     return(
@@ -33,7 +36,7 @@ class Header extends Component{
               >
                 User Panel
               </NavLink>
-              <Login handler={this.props.handler}/>
+              <Login onUserLoggedIn = {this.props.onUserLoggedIn} />
             </nav>
           </div>
         </header>

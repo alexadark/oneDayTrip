@@ -54,11 +54,11 @@ router.post('/user', jsonBodyParser, (req, res) => {
        .then(user => {
          if (!user) throw Error("user does not exists");
          if (user.password !== password) throw Error("wrong password");
-         return user
+         return user._id
        })
     
-       .then((user) => {
-         res.json(success(user));
+       .then(id => {
+         res.json(success({id}));
        })
        .catch(err => {
          res.json(fail(err.message));

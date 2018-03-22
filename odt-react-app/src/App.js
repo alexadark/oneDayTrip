@@ -18,21 +18,22 @@ class App extends Component {
     constructor(props){
         super(props)
         this.state={
-            user:''
+            user: {
+                id:'',
+                username: ''
+            }
         }
     }
 
-    handler=(user)=>{
-        console.log('pop')
-        console.log(user)
-        // this.setState({user})
-    }
+   onUserLoggedIn = (id, username) =>{
+        this.setState({user: {id, username}})
+   }
 
   render() {
     return (
         <BrowserRouter>
             <div>
-                <Header handler={this.handler}/>
+                <Header onUserLoggedIn={this.onUserLoggedIn}/>
                 <Switch>
                     <Route path="/" exact={true} render={() => (<Redirect to="/home" />)} />
                     <Route path="/home" component={Home} />
