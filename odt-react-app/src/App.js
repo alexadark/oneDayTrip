@@ -33,16 +33,16 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div>
-                <Header onUserLoggedIn={this.onUserLoggedIn}/>
+                <Header onUserLoggedIn={this.onUserLoggedIn} user={this.state.user}/>
                 <Switch>
                     <Route path="/" exact={true} render={() => (<Redirect to="/home" />)} />
                     <Route path="/home" component={Home} />
                     <Route path="/publish"  render={() => <Publish  user = {this.state.user}/>}/>
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
-                    <Route path="/user-panel/:username"  component={UserPanel}/>
-                    <Route path="/user-profile/:username"  component={UserProfile}/>
-                    <Route path="/trip-info/:tripId"  component={TripInfo}/>
+                    <Route path="/user-panel/:username" component={UserPanel} />
+                    <Route path="/user-profile/:username"  render={() => <UserProfile  user = {this.state.user}/>}/>
+                    <Route path="/trip-info/:tripId"  render={() => <TripInfo  user = {this.state.user}/>}/>
                     
 
                 </Switch>
