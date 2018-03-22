@@ -5,7 +5,6 @@ class Publish extends Component {
     constructor(props){
         super(props)
         this.state = {
-            creatorId: '',
             from: '',
             to: '',
             date: '',
@@ -20,16 +19,16 @@ class Publish extends Component {
         }
     }
 
-    componentDidMount(){
-        api.getUsernameId(this.props.match.params.username)
-            .then((res) => this.setState({creatorId: res.data}))
-
-    }
+    // componentDidMount(){
+    //     api.getUsernameId(this.props.match.params.username)
+    //         .then((res) => this.setState({creatorId: res.data}))
+    //
+    // }
 
     publish(){
-        const {creatorId, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description} = this.state
+        const { from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description} = this.state
 
-        api.createTrip(creatorId, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description)
+        api.createTrip(this.props.user.id, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description)
 
             .then(() => this.setState({from:'', to:'', date:'',  departureTime:'', returnTime:'', tripTime:'', price:'', distance:'',seats:'', meetingPoint: '', description:''}))
 
@@ -53,7 +52,7 @@ class Publish extends Component {
     render(){
         return (
             <div className="uk-container">
-                <h2 className="uk-text-center">Publish your Trip for user {this.props.match.params.username}</h2>
+                <h2 className="uk-text-center">Hello {this.props.user.username}, Publish your next trip!</h2>
                 <form  data-uk-grid
                        onSubmit={e => {
                            e.preventDefault();

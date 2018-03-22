@@ -37,7 +37,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/" exact={true} render={() => (<Redirect to="/home" />)} />
                     <Route path="/home" component={Home} />
-                    <Route path="/:username/publish"  component={Publish}/>
+                    <Route path="/publish"  render={() => <Publish  user = {this.state.user}/>}/>
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
                     <Route path="/user-panel/:username"  component={UserPanel}/>
