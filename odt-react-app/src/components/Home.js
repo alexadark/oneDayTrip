@@ -35,8 +35,8 @@ class Home extends Component{
     // }
     searchTrips = () =>{
         const {location, arrival, departure} = this.state
-        //Send state in url parameters
-        this.props.history.push(`home/${location}/${arrival}/${departure}`)
+        //Send state in url parametersj
+        this.props.history.push(`/home/${location}/${arrival}/${departure}`)
     }
 
     keepLocation = location => this.setState({location})
