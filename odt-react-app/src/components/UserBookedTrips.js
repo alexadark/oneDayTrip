@@ -34,7 +34,7 @@ class UserBookedTrips extends Component {
                 <h3>Booked trips</h3>
 
                 {this.state.trips.map((trip, index) => (
-                    <BookedTripItem trip={trip} key={index} />
+                    <BookedTripItem trip={trip} key={index} user={this.props.user} />
                 ))}
             </div>
         </div>;

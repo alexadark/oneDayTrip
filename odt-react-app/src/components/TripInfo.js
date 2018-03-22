@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
 import api from '../api'
+import Confirmation from './Confirmation'
 
 
 //TODO pass name of creator
 
 //TODO replace icons by passengers image and link to public profile
+
+//TODO add conditional component message : trip booked
 
 
 
@@ -14,7 +17,8 @@ class TripInfo extends Component {
         super(props)
 
         this.state = {
-            trip: ''
+            trip: '',
+
         }
     }
 
@@ -22,7 +26,10 @@ class TripInfo extends Component {
         api.getTripFromId(this.props.match.params.tripId)
             .then((res) => this.setState({trip: res.data}))
 
+    }
 
+    book = ()=> {
+        api.joinTrip(this.state.trip._id, this.props.user.id)
 
     }
 
@@ -62,10 +69,13 @@ class TripInfo extends Component {
                             </div>
                             {seats} seats available
                             <div className="book-button uk-flex uk-flex-center">
-                                <button className="uk-button uk-button-primary">
+                                <button className="uk-button uk-button-primary"
+                                onClick={this.book()}>
                                     Book!
                                 </button>
+
                             </div>
+                            {/*<Confirmation message={`Your trip to ${this.state.trip.to} is booked`} />*/}
                         </div>
 
                     </div>
@@ -79,4 +89,4 @@ class TripInfo extends Component {
 }
 
 
-export default TripInfo;
+export default withRouter(TripInfo);

@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import api from  '../api'
 
 
 class BookedTripItem extends Component {
     constructor(props){
         super(props)
+    }
+
+    unjoinTrip = ()=>{
+       return api.unjoinTrip(this.props.trip._id,this.props.user.id)
+
     }
 
     render(){
@@ -24,7 +30,8 @@ class BookedTripItem extends Component {
                         </button>
                         <br />
 
-                        <button className="uk-button uk-button-small uk-margin-small-bottom uk-button-primary ">
+                        <button className="uk-button uk-button-small uk-margin-small-bottom uk-button-primary "
+                        onClick={this.unjoinTrip()}>
                             Unjoin Trip
                         </button>
                         <br />

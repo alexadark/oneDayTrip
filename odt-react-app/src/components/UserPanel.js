@@ -15,11 +15,9 @@ class UserPanel extends Component {
   }
 
   componentDidMount() {
-    api
-      .getUsernameId(this.props.match.params.username)
-        .then(res => res.data)
-      .then(userId => api.getUserFromId(userId))
-        .then(res => this.setState({user: res.data}));
+    api.getUserFromId(this.props.user.id)
+        .then(res => this.setState({user: res.data}))
+
   }
 
   render() {
@@ -42,8 +40,8 @@ class UserPanel extends Component {
           className="user-panels uk-margin-large-top uk-child-width-1-2@m"
           data-uk-grid
         >
-          <UserPublishedTrips user={this.state.user} />
-          <UserBookedTrips user={this.state.user} />
+          <UserPublishedTrips user={this.props.user} />
+          <UserBookedTrips user={this.props.user} />
         </div>
       </div>
     );

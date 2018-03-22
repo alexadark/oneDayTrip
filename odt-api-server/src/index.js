@@ -66,6 +66,7 @@ router.post('/user', jsonBodyParser, (req, res) => {
  
 })
 
+//TODO exclude password from result
 /**
  * Find user ID by username
  */
@@ -316,6 +317,7 @@ router.put('/trip/join/:tripId/:passengerId', (req, res) => {
             //TODO error if a passenger is already on a trip
             if ((trip.passengers).includes({"_id": ObjectId(passengerId)})) throw Error('this passenger has already' +
                 ' joined this trip')
+            if(trip.seats - trip.passengers.length < 1) throw Error ('This trip is fully booked')
             trip.passengers.push({"_id": ObjectId(passengerId)})
             return trip.save()
         })

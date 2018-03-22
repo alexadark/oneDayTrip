@@ -30,7 +30,7 @@ class Header extends Component {
 
                                 <NavLink
                                     className="uk-button uk-button-small uk-button-primary uk-margin-small-right"
-                                    to="/user-panel"
+                                    to={`/user-panel/${this.props.user.username}`}
                                     activeClassName="is-active"
                                 >
                                     User Panel

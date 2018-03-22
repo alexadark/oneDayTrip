@@ -3,8 +3,6 @@ import TripList from './TripList'
 import api from '../api'
 import { withRouter, Route } from "react-router-dom"
 
-
-//TODO clean url and serach when new search
 //TODO put date and location into the title: This week ...
 
 //TODO geolocalize and show trips for the next 7 days

@@ -40,7 +40,7 @@ class App extends Component {
                     <Route path="/publish"  render={() => <Publish  user = {this.state.user}/>}/>
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
-                    <Route path="/user-panel/:username" component={UserPanel} />
+                    <Route path="/user-panel/:username" render={() => <UserPanel  user = {this.state.user} /> }/>
                     <Route path="/user-profile/:username"  render={() => <UserProfile  user = {this.state.user}/>}/>
                     <Route path="/trip-info/:tripId"  render={() => <TripInfo  user = {this.state.user}/>}/>
                     
