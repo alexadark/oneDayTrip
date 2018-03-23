@@ -9,10 +9,7 @@ class Login extends Component {
         super(props);
         this.state = {
             username: "",
-            password: "",
-
-
-
+            password: ""
         }
     }
 
@@ -21,8 +18,10 @@ class Login extends Component {
         api.login(username, password)
             .then(res => {
                 try {
+                    this.setState({closeModal:true})
                     this.props.onUserLoggedIn(res.data.id, username)
                     this.props.history.push(`/user-panel/${username}`)
+
                 }
                 catch(error){
                     this.setState({error: res.error})
@@ -37,19 +36,18 @@ class Login extends Component {
     keepPassword = password => this.setState({password});
 
     render() {
+
         return <div className="uk-display-inline">
 
             <button className="uk-button uk-button-small uk-button-primary uk-margin-small-right"
-                    /*{this.state.loggedIn ? style={display: 'none', opacity: 0}: ''}*/
                     data-uk-toggle="target: #login">
                 Login
             </button>
             <div id="login"
-                 data-uk-modal>
+                 data-uk-modal
+                className={this.state.closeModal ? "closeModal" : ''}
+                 >
                 <div className="uk-modal-dialog uk-modal-body">
-                    <button className="uk-modal-close-default"
-                            type="button"
-                            uk-close/>
                     <h2 className="uk-modal-title">Login</h2>
                     <form data-uk-grid
                           onSubmit={e => {
