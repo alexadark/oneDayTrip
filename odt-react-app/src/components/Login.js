@@ -24,9 +24,7 @@ class Login extends Component {
 
             })
     }
-    componentWillReceiveProps(){
-        console.log(this.props)
-    }
+
     keepUsername = username => this.setState({username});
     keepPassword = password => this.setState({password});
 

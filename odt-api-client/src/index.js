@@ -81,13 +81,14 @@ const api = {
 
 
     unjoinTrip(tripId, passengerId){
-        return this.call('delete',`trip/unjoin/${tripId}/${passengerId}`)
+        return this.call('delete',`trip/unjoin/
+        ${tripId}/${passengerId}`)
     },
 
 
 
     comment(commentedUserId, userId, comment, rating){
-        return this.call('put',`trip/${commentedUserId}/${userId}`,{comment, rating})
+        return this.call('put',`user/comment/${commentedUserId}/${userId}`,{comment, rating})
     },
     geoLocalize(lat,lng){
         return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCRDIKkOEGj3jXB9LEuiC8_yYiu535htcI`)

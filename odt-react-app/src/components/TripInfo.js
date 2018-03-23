@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import {withRouter} from "react-router-dom";
+import React, { Component } from 'react'
+import {withRouter} from "react-router-dom"
 import api from '../api'
 import Confirmation from './Confirmation'
+import CommentForm from './CommentForm'
 
 
 //TODO pass name of creator
@@ -9,6 +10,8 @@ import Confirmation from './Confirmation'
 //TODO replace icons by passengers image and link to public profile
 
 //TODO add conditional component message : trip booked
+
+//TODO make button rate and comment conditional
 
 
 
@@ -18,6 +21,7 @@ class TripInfo extends Component {
 
         this.state = {
             trip: '',
+            creator: ''
 
         }
     }
@@ -25,6 +29,10 @@ class TripInfo extends Component {
     componentDidMount(){
         api.getTripFromId(this.props.match.params.tripId)
             .then((res) => this.setState({trip: res.data}))
+            .then(trip=>  api.getUserFromId(this.state.trip.creator)
+                .then((res) => this.setState({creator: res.data}))
+            )
+
 
     }
 
@@ -35,10 +43,13 @@ class TripInfo extends Component {
 
     render(){
         const trip = this.state.trip
+        // const passengers = trop.passengers
+
 
         const date = trip !==''? trip.departureDate.slice(0,10) : ''
-        const passengers = trip !==''? trip.passengers.length : ''
-        const seats = trip !==''? trip.seats - passengers : ''
+        const passengers = trip !== ''? trip.passengers: ''
+        const passengersLength = trip !==''? trip.passengers.length : ''
+        const seats = trip !==''? trip.seats - passengersLength : ''
         return (
 
             <div className="uk-container">
@@ -51,15 +62,22 @@ class TripInfo extends Component {
                     <div className="uk-width-2-3@m">
                         <div className="uk-card uk-card-default uk-card-body">
                             <span data-uk-icon="icon: user; ratio: 2"></span>
-                            name <br/>
+                            {this.state.creator.name} {this.state.creator.surname}<br/>
                             meeting point: {trip.meetingPoint} <br/>
 
                             <p>{trip.description}</p>
+                            {/*{passengers.some(passenger => passenger === this.props.user.id) ? '<button' +*/}
+                                {/*' className="uk-button' +*/}
+                                {/*' uk-button-primary uk-button-small">Rate and comment</button>' : ''}*/}
+                                <CommentForm user={this.props.user} trip={this.state.trip}/>
+
+
+
                         </div>
                     </div>
                     <div className="uk-width-1-3@m">
                         <div className="uk-card uk-card-default uk-card-body">Price: {trip.price} <br/>
-                            {passengers} Passengers on this trip
+                            {passengersLength} Passengers on this trip
                             <div className="passengers uk-flex"
                                  >
                                 <span data-uk-icon="icon: user; ratio: 2"></span>
