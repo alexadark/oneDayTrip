@@ -30,8 +30,6 @@ This is a full stack javascript app using mongodb, mongoose, node.js, express, r
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" width="200" >
 
 
-
-https://evening-refuge-60932.herokuapp.com/ |
-https://git.heroku.com/evening-refuge-60932.git
+https://fast-headland-72756.herokuapp.com/ | https://git.heroku.com/fast-headland-72756.git
 
 
