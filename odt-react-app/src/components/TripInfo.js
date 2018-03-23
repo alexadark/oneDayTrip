@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {withRouter} from "react-router-dom"
+import {withRouter, NavLink} from "react-router-dom"
 import api from '../api'
 import Confirmation from './Confirmation'
 import CommentForm from './CommentForm'
@@ -61,8 +61,10 @@ class TripInfo extends Component {
                 <div className="trip-panels" data-uk-grid>
                     <div className="uk-width-2-3@m">
                         <div className="uk-card uk-card-default uk-card-body">
-                            <span data-uk-icon="icon: user; ratio: 2"></span>
-                            {this.state.creator.name} {this.state.creator.surname}<br/>
+                            <NavLink to={`/user-profile/${this.state.creator._id}`}>
+                                <span data-uk-icon="icon: user; ratio: 2"></span>
+                                {this.state.creator.name} {this.state.creator.surname}
+                            </NavLink><br/>
                             meeting point: {trip.meetingPoint} <br/>
 
                             <p>{trip.description}</p>

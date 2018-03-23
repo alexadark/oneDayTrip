@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api'
 import TripListItem  from './TripListItem'
-import {
-    Route
-} from 'react-router-dom'
 
 
 class TripList extends Component {

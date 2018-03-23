@@ -41,7 +41,7 @@ class App extends Component {
                     <Route path="/sign-up"  component={SignUp}/>
                     {/*<Route   component={NotFoundPage}/>*/}
                     <Route path="/user-panel/:username" render={() => <UserPanel  user = {this.state.user} /> }/>
-                    <Route path="/user-profile/:username"  render={() => <UserProfile  user = {this.state.user}/>}/>
+                    <Route path="/user-profile/:id"  component={UserProfile} />
                     <Route path="/trip-info/:tripId"  render={() => <TripInfo  user = {this.state.user}/>}/>
                     
 
