@@ -3,7 +3,7 @@
 var axios = require('axios');
 
 var api = {
-    baseUrl: 'http://localhost:5000/api',
+    baseUrl: 'https://fast-headland-72756.herokuapp.com/api',
 
     call: function call(method, path, body) {
         return axios[method](this.baseUrl + '/' + path, body)

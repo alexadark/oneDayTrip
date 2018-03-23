@@ -24,11 +24,22 @@ class App extends Component {
             }
         }
     }
+    // addUserToLocalStorage= (id, username) =>{
+    //     return Promise.resolve()
+    //     localStorage.setItem("id",id)
+    //     localStorage.setItem("username", username)
+    // }
 
    onUserLoggedIn = (id, username) =>{
-        this.setState({user: {id, username}})
+       localStorage.setItem("id",id)
+       localStorage.setItem("username", username)
+       this.setState({user: {id, username}})
+   }
 
-
+   componentDidMount(){
+        const id = localStorage.getItem("id")
+       const username = localStorage.getItem("username")
+       this.setState({user: {id, username}})
    }
 
   render() {

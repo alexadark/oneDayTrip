@@ -9,6 +9,8 @@ class Logout extends Component {
 
     logout = () => {
         this.props.onUserLoggedIn('','')
+        localStorage.removeItem("username")
+        localStorage.removeItem("id")
         this.props.history.push('/home')
 
     }
