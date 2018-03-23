@@ -27,6 +27,8 @@ class App extends Component {
 
    onUserLoggedIn = (id, username) =>{
         this.setState({user: {id, username}})
+
+
    }
 
   render() {

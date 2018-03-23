@@ -81,8 +81,8 @@ const api = {
 
 
     unjoinTrip(tripId, passengerId){
-        return this.call('delete',`trip/unjoin/
-        ${tripId}/${passengerId}`)
+        return this.call('delete',`trip/unjoin/${tripId}/${passengerId}`)
+
     },
 
 

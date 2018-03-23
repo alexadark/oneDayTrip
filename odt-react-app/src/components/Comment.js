@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import api from '../api'
 
+//TODO url changes user id but doesn't redirect
+
 class Comment extends Component {
     constructor(props) {
         super(props)
@@ -46,7 +48,7 @@ class Comment extends Component {
                 <h3>{this.ratingTitle(rating)}</h3>
                 Date: {comment.date.slice(0,10)}
                 <p>{comment.comment}</p>
-                //TODO url changes user id but doesn't redirect
+
                 Author: <NavLink to={`/user-profile/${user._id}`}>
                 {user.name} {user.surname}
                 </NavLink>

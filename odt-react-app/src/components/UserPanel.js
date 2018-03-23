@@ -30,9 +30,9 @@ class UserPanel extends Component {
             Delete Profile
           </button>
           <NavLink to="/user-profile">
-            <button className="uk-button uk-button-primary uk-button-small uk-margin-right">
+            <NavLink to={`/user-profile/${this.props.user.id}`} className="uk-button uk-button-primary uk-button-small uk-margin-right">
               see my reviews
-            </button>
+            </NavLink>
           </NavLink>
         </div>
 
