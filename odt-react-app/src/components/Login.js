@@ -11,6 +11,8 @@ class Login extends Component {
             username: "",
             password: "",
 
+
+
         }
     }
 
@@ -18,8 +20,14 @@ class Login extends Component {
         const {username, password} = this.state
         api.login(username, password)
             .then(res => {
-                this.props.onUserLoggedIn(res.data.id, username)
-                this.props.history.push(`/user-panel/${username}`)
+                try {
+                    this.props.onUserLoggedIn(res.data.id, username)
+                    this.props.history.push(`/user-panel/${username}`)
+                }
+                catch(error){
+                    this.setState({error: res.error})
+                }
+
                
 
             })
@@ -68,6 +76,7 @@ class Login extends Component {
                                    value="login"/>
                         </div>
                     </form>
+                    {this.state.error? <h2 className="uk-text-center uk-text-danger">{this.state.error}</h2>:''}
                 </div>
             </div>
         </div>
