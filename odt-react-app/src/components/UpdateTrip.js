@@ -28,7 +28,7 @@ class UpdateTrip extends Component {
 
     }
 
-    publish() {
+    updateTrip() {
         const {creatorId, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
 
         api.updateTrip(creatorId, this.props.trip._id, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password)
@@ -83,7 +83,7 @@ class UpdateTrip extends Component {
                         <form data-uk-grid
                               onSubmit={e => {
                                   e.preventDefault();
-                                  this.publish();
+                                  this.updateTrip();
                               }}>
                             <div className="uk-width-1-3@m">
                                 <input type="text"

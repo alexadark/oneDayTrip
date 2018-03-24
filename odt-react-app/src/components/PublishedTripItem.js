@@ -28,7 +28,7 @@ class PublishedTripItem extends Component {
                   <br />
                     <ViewTrip trip={this.props.trip} user={this.props.user} />
                   <br />
-                  <CancelTrip/>
+                  <CancelTrip trip={this.props.trip}/>
                   <br />
                 </div>
               </div>

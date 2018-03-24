@@ -62,8 +62,8 @@ const api = {
 
 
 
-    cancelTrip(creatorId, password){
-        return this.call('delete',`trip/${creatorId}`, {password})
+    cancelTrip(creatorId, tripId, password){
+        return this.call('delete',`trip/${creatorId}/${tripId}`, {password})
     },
 
 

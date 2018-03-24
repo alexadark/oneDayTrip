@@ -38,14 +38,14 @@ class TripInfo extends Component {
     book = ()=> {
         api.joinTrip(this.state.trip._id, this.props.user.id)
             .then(res => {
-                // try{
-                //     this.setState({success: res.data})
-                //     // api.getTripFromId(this.props.match.params.tripId)
-                //     //     .then((res) => this.setState({trip: res.data}))
-                // }
-                // catch(error){
-                //     this.setState({error: res.error})
-                // }
+                try{
+                    this.setState({success: res.data})
+                    // api.getTripFromId(this.props.match.params.tripId)
+                    //     .then((res) => this.setState({trip: res.data}))
+                }
+                catch(error){
+                    this.setState({error: res.error})
+                }
             })
 
     }
@@ -101,8 +101,8 @@ class TripInfo extends Component {
 
 
                             </div>
-                            {/*{this.state.success? <h3 className="uk-text-success">{this.state.success}</h3>: ''}*/}
-                            {/*{this.state.error? <h3 className="uk-text-danger">{this.state.error}</h3>: ''}*/}
+                            {this.state.success? <h3 className="uk-text-success">{this.state.success}</h3>: ''}
+                            {this.state.error? <h3 className="uk-text-danger">{this.state.error}</h3>: ''}
 
                         </div>
 

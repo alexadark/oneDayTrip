@@ -21,7 +21,7 @@ class CancelTrip extends Component {
     cancel() {
         const {creatorId,  password} = this.state
 
-        api.cancelTrip(creatorId,  password)
+        api.cancelTrip(creatorId, this.props.trip._id,  password)
 
             .then(() => this.setState({
                 creatorId: '',

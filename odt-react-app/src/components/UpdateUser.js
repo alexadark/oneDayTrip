@@ -6,7 +6,7 @@ class UpdateUser extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: '',
+            name: props.user.name,
             surname: '',
             email: '',
             picture: '',
