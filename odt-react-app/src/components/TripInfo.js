@@ -5,7 +5,6 @@ import Confirmation from './Confirmation'
 import CommentForm from './CommentForm'
 
 
-//TODO pass name of creator
 
 //TODO replace icons by passengers image and link to public profile
 
@@ -38,13 +37,21 @@ class TripInfo extends Component {
 
     book = ()=> {
         api.joinTrip(this.state.trip._id, this.props.user.id)
+            .then(res => {
+                // try{
+                //     this.setState({success: res.data})
+                //     // api.getTripFromId(this.props.match.params.tripId)
+                //     //     .then((res) => this.setState({trip: res.data}))
+                // }
+                // catch(error){
+                //     this.setState({error: res.error})
+                // }
+            })
 
     }
 
     render(){
         const trip = this.state.trip
-        // const passengers = trop.passengers
-
 
         const date = trip !==''? trip.departureDate.slice(0,10) : ''
         const passengers = trip !== ''? trip.passengers: ''
@@ -68,9 +75,7 @@ class TripInfo extends Component {
                             meeting point: {trip.meetingPoint} <br/>
 
                             <p>{trip.description}</p>
-                            {/*{passengers.some(passenger => passenger === this.props.user.id) ? '<button' +*/}
-                                {/*' className="uk-button' +*/}
-                                {/*' uk-button-primary uk-button-small">Rate and comment</button>' : ''}*/}
+
                                 <CommentForm user={this.props.user} trip={this.state.trip}/>
 
 
@@ -94,8 +99,11 @@ class TripInfo extends Component {
                                     Book!
                                 </button>
 
+
                             </div>
-                            {/*<Confirmation message={`Your trip to ${this.state.trip.to} is booked`} />*/}
+                            {/*{this.state.success? <h3 className="uk-text-success">{this.state.success}</h3>: ''}*/}
+                            {/*{this.state.error? <h3 className="uk-text-danger">{this.state.error}</h3>: ''}*/}
+
                         </div>
 
                     </div>

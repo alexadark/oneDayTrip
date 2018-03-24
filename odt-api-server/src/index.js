@@ -314,7 +314,7 @@ router.put('/trip/join/:tripId/:passengerId', (req, res) => {
     Trip.findOne({"_id": ObjectId(tripId)})
         .then(trip => {
             if (!trip.passengers) trip.passengers = [];
-            //TODO error if a passenger is already on a trip
+
             if ((trip.passengers).includes({"_id": ObjectId(passengerId)})) throw Error('this passenger has already' +
                 ' joined this trip')
             if(trip.seats - trip.passengers.length < 1) throw Error ('This trip is fully booked')
@@ -322,13 +322,12 @@ router.put('/trip/join/:tripId/:passengerId', (req, res) => {
             return trip.save()
         })
         .then(() => {
-            res.json(success())
+            res.json(success('Trip booked'))
         })
         .catch(err => {
             res.json(fail(err.message))
         })
 });
-
 /**
  * Unjoin trip
  */
@@ -340,12 +339,14 @@ router.delete('/trip/unjoin/:tripId/:passengerId', (req, res) => {
         .then(trip => {
             const passengersArray = trip.passengers
             const index = passengersArray.indexOf(passenger)
+            // if(index <0) throw Error('This passenger is not on this trip')
             passengersArray.splice(index, 1)
+            console.log(trip)
 
             return trip.save()
         })
-        .then(() => {
-            res.json(success())
+        .then((trip) => {
+            res.json(success(trip))
         })
         .catch(err => {
             res.json(fail(err.message))
