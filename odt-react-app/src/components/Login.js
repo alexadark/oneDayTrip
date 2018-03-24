@@ -45,7 +45,7 @@ class Login extends Component {
             </button>
             <div id="login"
                  data-uk-modal
-                // className={this.state.closeModal ? "closeModal" : ''}
+                 className={this.state.closeModal ? "closeModal" : ''}
                  >
                 <div className="uk-modal-dialog uk-modal-body">
                     <h2 className="uk-modal-title">Login</h2>
