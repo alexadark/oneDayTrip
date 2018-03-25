@@ -80,14 +80,14 @@ class Publish extends Component {
                                value={this.state.date}/>
                     </div>
                     <div className="uk-width-1-3@m">
-                        <input type="text"
+                        <input type="time"
                                className="uk-input" placeholder="Departure time"
                                required="true"
                                onChange={e => this.keepDeparture(e.target.value)}
                                value={this.state.departureTime}/>
                     </div>
                     <div className="uk-width-1-3@m">
-                        <input type="text"
+                        <input type="time"
                                className="uk-input" placeholder="Return Time"
                                required="true"
                                onChange={e => this.keepReturn(e.target.value)}

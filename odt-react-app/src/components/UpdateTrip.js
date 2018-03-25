@@ -26,6 +26,20 @@ class UpdateTrip extends Component {
         const { from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
 
         api.updateTrip(this.props.trip.creator, this.props.trip._id, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password)
+            .then(res => {
+                try {
+                    this.setState({closeModal:true})
+                    this.setState({success: res.data})
+
+
+                }
+                catch(error){
+                    this.setState({error: res.error})
+                }
+
+
+
+            })
 
             .then(() => this.setState({
                 from: '',
@@ -68,11 +82,10 @@ class UpdateTrip extends Component {
 
 
                 <div id="updateTrip"
-                     data-uk-modal>
+                     data-uk-modal
+                     className={this.state.closeModal ? "closeModal" : ''}>
                     <div className="uk-modal-dialog uk-modal-body uk-width-xxlarge">
-                        <button className="uk-modal-close-default"
-                                type="button"
-                                uk-close/>
+
                         <h2 className="uk-text-center">Update Trip</h2>
                         <form data-uk-grid
                               onSubmit={e => {
@@ -104,7 +117,7 @@ class UpdateTrip extends Component {
                                        value={this.state.date}/>
                             </div>
                             <div className="uk-width-1-3@m">
-                                <input type="text"
+                                <input type="time"
                                        className="uk-input"
                                        placeholder="Departure time"
                                        required="true"
@@ -112,7 +125,7 @@ class UpdateTrip extends Component {
                                        value={this.state.departureTime}/>
                             </div>
                             <div className="uk-width-1-3@m">
-                                <input type="text"
+                                <input type="time"
                                        className="uk-input"
                                        placeholder="Return Time"
                                        required="true"
@@ -182,6 +195,7 @@ class UpdateTrip extends Component {
                             </div>
 
                         </form>
+                        {this.state.error? <h2 className="uk-text-center uk-text-danger">{this.state.error}</h2>:''}
                     </div>
                 </div>
             </div>
