@@ -32,7 +32,7 @@ class BookedTripItem extends Component {
                         <br />
 
                         <button className="uk-button uk-button-small uk-margin-small-bottom uk-button-primary "
-                        onClick={this.unjoinTrip()}>
+                        onClick={()=>this.unjoinTrip()}>
                             Unjoin Trip
                         </button>
                         <br />

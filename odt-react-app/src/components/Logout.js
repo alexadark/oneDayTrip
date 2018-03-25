@@ -20,7 +20,7 @@ class Logout extends Component {
         return (
 
                 <div className="uk-display-inline">
-                    <button className="uk-button uk-button-small uk-button-secondary" onClick={this.logout}>Logout</button>
+                    <button className="uk-button uk-button-small uk-button-secondary" onClick={()=>this.logout}>Logout</button>
                     <div className="uk-text-small uk-text-center uk-text-uppercase uk-margin-small-top uk-text-muted">Welcomme {this.props.user.username}</div>
                 </div>
 

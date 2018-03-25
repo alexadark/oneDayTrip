@@ -6,7 +6,6 @@ class UpdateTrip extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            creatorId: '',
             from: '',
             to: '',
             date: '',
@@ -22,16 +21,11 @@ class UpdateTrip extends Component {
         }
     }
 
-    componentDidMount() {
-        api.getUsernameId(this.props.match.params.username)
-            .then((res) => this.setState({creatorId: res.data}))
-
-    }
 
     updateTrip() {
-        const {creatorId, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
+        const { from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
 
-        api.updateTrip(creatorId, this.props.trip._id, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password)
+        api.updateTrip(this.props.trip.creator, this.props.trip._id, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password)
 
             .then(() => this.setState({
                 from: '',
