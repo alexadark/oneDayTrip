@@ -6,7 +6,7 @@ class UpdateUser extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: props.user.name,
+            name:'',
             surname: '',
             email: '',
             picture: '',
@@ -15,18 +15,24 @@ class UpdateUser extends Component {
         }
 
 
+
     }
 //TODO add values from props user to the state, so values are not erased when we don;t enter a value
     componentWillReceiveProps(){
-        const user = this.props.user
-        console.log(user)
-        this.setState({
-            name: user.name,
-            surname: user.surname,
-            email: user.email,
-            picture: user.picture,
-        })
+
+        // console.log(user)
+
     }
+    //
+    // getUserValues = (user) =>{
+    //
+    //     this.setState({
+    //         name: user.name,
+    //         surname: user.surname,
+    //         email: user.email,
+    //         picture: user.picture,
+    //     })
+    // }
 
 
     register() {
@@ -53,7 +59,8 @@ class UpdateUser extends Component {
             <div className="uk-display-inline">
 
                 <button className="uk-button uk-button-small uk-button-primary uk-margin-small-right"
-                        data-uk-toggle="target: #updateProfile">
+                        data-uk-toggle="target: #updateProfile"
+                       >
                     Update Profile
                 </button>
 

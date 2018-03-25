@@ -7,3 +7,6 @@ body {
 .uk-modal-page{
   overflow:scroll !important;
 }
+.closeModal{
+  display: none !important;
+}
