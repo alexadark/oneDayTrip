@@ -2,40 +2,38 @@ import React, {Component} from 'react';
 import api from '../api'
 
 
+
 class UpdateUser extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name:'',
+            name: props.user.name,
             surname: '',
             email: '',
             picture: '',
             newPassword: '',
-            password: ''
+            password: '',
+
         }
 
 
-
     }
+
+
 //TODO add values from props user to the state, so values are not erased when we don;t enter a value
-    componentWillReceiveProps(){
-
-        // console.log(user)
-
+    componentDidMount() {
+        const user = this.props.user
+        console.log(user)
+        this.setState({
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            picture: user.picture,
+        })
     }
-    //
-    // getUserValues = (user) =>{
-    //
-    //     this.setState({
-    //         name: user.name,
-    //         surname: user.surname,
-    //         email: user.email,
-    //         picture: user.picture,
-    //     })
-    // }
 
 
-    register() {
+    update() {
         const {name, surname, email, picture, newPassword, password} = this.state
         const userId = this.props.user._id
 
@@ -59,8 +57,7 @@ class UpdateUser extends Component {
             <div className="uk-display-inline">
 
                 <button className="uk-button uk-button-small uk-button-primary uk-margin-small-right"
-                        data-uk-toggle="target: #updateProfile"
-                       >
+                        data-uk-toggle="target: #updateProfile">
                     Update Profile
                 </button>
 
@@ -75,7 +72,7 @@ class UpdateUser extends Component {
                         <form data-uk-grid
                               onSubmit={e => {
                                   e.preventDefault();
-                                  this.register();
+                                  this.update();
                               }}>
                             <div className="uk-width-1-2@m">
                                 <input type="text"
