@@ -23,9 +23,9 @@ class UpdateUser extends Component {
 //TODO add values from props user to the state, so values are not erased when we don;t enter a value
 // TODO fix error handling
 
-    componentDidMount() {
-        const user = this.props.user
-        console.log(user)
+    componentWillReceiveProps(props) {
+        const user = props.user
+
         this.setState({
             name: user.name,
             surname: user.surname,

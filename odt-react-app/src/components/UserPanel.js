@@ -14,7 +14,7 @@ class UserPanel extends Component {
       };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     api.getUserFromId(this.props.user.id)
         .then(res => this.setState({user: res.data}))
 
@@ -25,7 +25,7 @@ class UserPanel extends Component {
       <div className="uk-container">
         <h2 className="uk-text-center">Hello {this.state.user.name}</h2>
         <div className="user-buttons uk-flex">
-         <UpdateUser user = {this.state.user}  />
+         <UpdateUser user={this.state.user}  />
           <NavLink to={'/home'} className="uk-button uk-button-primary uk-button-small  uk-margin-right">
             Search Trips
           </NavLink>

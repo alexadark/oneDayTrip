@@ -21,6 +21,25 @@ class UpdateTrip extends Component {
         }
     }
 
+    componentWillReceiveProps(props) {
+        const trip = props.trip
+
+        this.setState({
+            from: trip.from,
+            to: trip.to,
+            date: trip.date,
+            meetingPoint: trip.meetingPoint,
+            departureTime: trip.departureTime,
+            returnTime: trip.returnTime,
+            tripTime: trip.tripTime,
+            price: trip.price,
+            distance: trip.distance,
+            seats: trip.seats,
+            description: trip.description,
+
+        })
+    }
+
 
     updateTrip() {
         const { from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
