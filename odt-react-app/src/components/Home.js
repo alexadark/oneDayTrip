@@ -34,6 +34,7 @@ class Home extends Component{
                     const arrival = moment().format().slice(0,10)
                     const departure = moment().add(7, 'days').format().slice(0,10)
                     this.setState({location, arrival, departure})
+                    this.props.history.push(`/home/${location}/${arrival}/${departure}`)
                 })
         })
 
