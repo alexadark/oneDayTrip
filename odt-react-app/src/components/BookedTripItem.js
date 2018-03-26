@@ -6,10 +6,15 @@ import ViewTrip from './ViewTrip'
 class BookedTripItem extends Component {
     constructor(props){
         super(props)
+        this.state ={
+            unJoin: false
+        }
     }
 
     unjoinTrip = ()=>{
        return api.unjoinTrip(this.props.trip._id,this.props.user.id)
+           .then(() => this.setState({unJoin:true}) )
+
 
     }
 
@@ -38,6 +43,7 @@ class BookedTripItem extends Component {
                         <br />
                     </div>
                 </div>
+                {this.state.unJoin? <h4 className="uk-text-danger uk-text-center">You have unjoined this trip</h4> :''}
             </div>
         </div>;
     }

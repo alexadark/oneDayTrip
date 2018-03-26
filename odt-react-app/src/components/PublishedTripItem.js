@@ -8,6 +8,8 @@ class PublishedTripItem extends Component {
     constructor(props){
         super(props)
     }
+
+
    
 
     render(){

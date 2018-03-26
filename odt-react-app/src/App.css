@@ -75,7 +75,7 @@ textarea {
  */
 html {
   /* 1 */
-  font-family: "Montserrat", sans-serif;
+  font-family: "Space Mono", monospace;
   font-size: 18px;
   font-weight: normal;
   line-height: 1.66;
@@ -4004,7 +4004,7 @@ ul.uk-nav-sub {
   padding: 0 15px;
   /* 3 */
   font-size: 0.6666666667rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Space Mono", monospace;
   /* 4 */
   text-decoration: none; }
 
@@ -8175,7 +8175,7 @@ iframe.uk-cover {
  */
 .uk-logo {
   font-size: 1.3333333333rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Space Mono", monospace;
   color: #333;
   /* 1 */
   text-decoration: none; }
