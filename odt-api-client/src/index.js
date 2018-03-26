@@ -92,7 +92,7 @@ const api = {
     },
     geoLocalize(lat,lng){
         return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCRDIKkOEGj3jXB9LEuiC8_yYiu535htcI`)
-            .then(res => res.results.address_components)
+            .then(res => res.data)
     }
 
 

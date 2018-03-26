@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import TripList from './TripList'
 import api from '../api'
 import { withRouter, Route } from "react-router-dom"
+import moment from 'moment'
 
 //TODO put date and location into the title: This week ...
 
@@ -21,16 +22,22 @@ class Home extends Component{
         }
     }
 
-    // componentDidMount(){
-    //     navigator.geolocation.getCurrentPosition(position => {
-    //         const lat = position.coords.latitude
-    //         const long = position.coords.longitude
-    //
-    //         api.geoLocalize(lat,long)
-    //             .then(location => this.setState({location}))
-    //     })
-    //
-    // }
+    componentDidMount(){
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude
+            const long = position.coords.longitude
+
+            api.geoLocalize(lat,long)
+                .then(res => {
+                    console.log(res)
+                    const location = res.results[7].address_components[1].long_name.toLowerCase()
+                    const arrival = moment().format().slice(0,10)
+                    const departure = moment().add(7, 'days').format().slice(0,10)
+                    this.setState({location, arrival, departure})
+                })
+        })
+
+    }
     searchTrips = () =>{
         const {location, arrival, departure} = this.state
         //Send state in url parametersj
