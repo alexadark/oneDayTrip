@@ -25,7 +25,7 @@ class UpdateUser extends Component {
 
     componentWillReceiveProps(props) {
         const user = props.user
-
+        console.log(user)
         this.setState({
             name: user.name,
             surname: user.surname,

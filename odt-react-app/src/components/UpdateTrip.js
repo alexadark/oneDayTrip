@@ -23,6 +23,7 @@ class UpdateTrip extends Component {
 
     componentWillReceiveProps(props) {
         const trip = props.trip
+        console.log(trip)
 
         this.setState({
             from: trip.from,
