@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import api from "../api"
-// import { withRouter } from "react-router-dom"
+import { withRouter } from "react-router-dom"
 
 
 class CancelTrip extends Component {
@@ -12,29 +12,28 @@ class CancelTrip extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     api.getUsernameId(this.props.match.params.username)
-    //         .then((res) => this.setState({creatorId: res.data}))
+    // componentWillReceiveProps() {
     //
+    // this.props.onCancelTrip()
     // }
 
     cancel() {
         api.cancelTrip(this.props.trip.creator, this.props.trip._id,  this.state.password)
-            .then(res =>{
-                console.log(res)
-                try{
-                    this.setState({closeModal:true})
+            .then(res => {
+                if(res.status === 'OK') {
+                    this.setState({closeModal: true, password: ''})
+                    // this.props.onCancelTrip(this.props.user.username)
+
+
                 }
-                catch(error){
+                else {
                     this.setState({error: res.error})
                 }
-            })
 
-            // .then(() => this.setState({
-            //
-            //     password: ''
-            //
-            // }))
+
+            })
+            .catch(err => this.setState({error:err}))
+
 
 
     }
@@ -59,7 +58,8 @@ class CancelTrip extends Component {
                         <h2 className="uk-text-center">Enter your password to confirm the cancellation</h2>
                         <form onSubmit={e => {
                             e.preventDefault();
-                            this.cancel();
+                            this.cancel()
+                            ;
                         }}>
 
 
@@ -78,6 +78,8 @@ class CancelTrip extends Component {
                             </div>
 
                         </form>
+                        {this.state.error ? <h3 className="uk-alert-danger uk-text-center uk-padding-small">{this.state.error}</h3>: ''}
+
                     </div>
                 </div>
             </div>
@@ -87,4 +89,4 @@ class CancelTrip extends Component {
 }
 
 
-export default CancelTrip;
+export default withRouter(CancelTrip);

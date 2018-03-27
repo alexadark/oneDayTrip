@@ -14,9 +14,13 @@ class UserPublishedTrips extends Component {
     }
 
     componentDidMount = () => {
+        this.listTrips(this.props.match.params.username)
 
+    }
+
+    listTrips(username){
         api
-            .getUsernameId(this.props.match.params.username)
+            .getUsernameId(username)
             .then(res => res.data)
             .then(creatorId => {
                 api
@@ -26,14 +30,6 @@ class UserPublishedTrips extends Component {
 
                     })
             })
-        //  api
-        //      .listUserPublishedTrips(this.props.user._id)
-        //      .then(trips => {
-        //          this.setState({ trips });
-        //
-        //      })
-
-
     }
 
     render() {
@@ -44,6 +40,9 @@ class UserPublishedTrips extends Component {
                 {this.state.trips.map((trip, index) => (
                     <PublishedTripItem trip={trip}
                                        key={index}
+                                       user={this.props.user}
+                                       onUpdateTrip = {this.listTrips}
+                                       onCancelTrip = {this.listTrips}
                     />
                 ))}
             </div>
