@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import api from '../api'
 import { withRouter } from "react-router-dom"
+import moment from 'moment'
 
 class UpdateTrip extends Component {
     constructor(props) {
@@ -21,17 +22,17 @@ class UpdateTrip extends Component {
         }
     }
 
-    componentWillReceiveProps(props) {
-        const trip = props.trip
+    componentWillMount() {
+        const trip = this.props.trip
         console.log(trip)
 
         this.setState({
             from: trip.from,
             to: trip.to,
-            date: trip.date,
+            date: moment(trip.departureDate).format('YYYY-MM-DD'),
             meetingPoint: trip.meetingPoint,
-            departureTime: trip.departureTime,
-            returnTime: trip.returnTime,
+            departureTime: moment(trip.departureDate).format('hh:mm'),
+            returnTime: moment(trip.returnDate).format('hh:mm'),
             tripTime: trip.tripTime,
             price: trip.price,
             distance: trip.distance,

@@ -20,7 +20,7 @@ class UpdateUser extends Component {
     }
 
 
-//TODO add values from props user to the state, so values are not erased when we don;t enter a value
+
 // TODO fix error handling
 
     componentWillReceiveProps(props) {

@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import UserPublishedTrips from './UserPublishedTrips'
 import UpdateUser from './UpdateUser'
 import UserBookedTrips from './UserBookedTrips'
-import api from "../api";
+import api from "../api"
 
 
 class UserPanel extends Component {
@@ -16,7 +16,9 @@ class UserPanel extends Component {
 
   componentWillMount() {
     api.getUserFromId(this.props.user.id)
-        .then(res => this.setState({user: res.data}))
+        .then(res => {
+            this.setState({user: res.data})
+        })
 
   }
 
@@ -40,8 +42,8 @@ class UserPanel extends Component {
           className="user-panels uk-margin-large-top uk-child-width-1-2@m"
           data-uk-grid
         >
-          <UserPublishedTrips user={this.props.user} />
-          <UserBookedTrips user={this.props.user} />
+          <UserPublishedTrips user={this.state.user} />
+          <UserBookedTrips user={this.state.user} />
         </div>
       </div>
     );

@@ -10,7 +10,6 @@ class PublishedTripItem extends Component {
     }
 
 
-   
 
     render(){
          const seats = this.props.trip.seats-this.props.trip.passengers.length
