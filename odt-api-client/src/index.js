@@ -87,8 +87,8 @@ const api = {
 
 
 
-    comment(commentedUserId, userId, comment, rating){
-        return this.call('put',`user/comment/${commentedUserId}/${userId}`,{comment, rating})
+    comment(commentedUserId, userId, commentText, rating){
+        return this.call('post',`user/comment/${commentedUserId}/${userId}`,{commentText, rating})
     },
     geoLocalize(lat,lng){
         return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCRDIKkOEGj3jXB9LEuiC8_yYiu535htcI`)

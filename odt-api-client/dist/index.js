@@ -58,8 +58,8 @@ var api = {
     unjoinTrip: function unjoinTrip(tripId, passengerId) {
         return this.call('delete', 'trip/unjoin/' + tripId + '/' + passengerId);
     },
-    comment: function comment(commentedUserId, userId, _comment, rating) {
-        return this.call('put', 'user/comment/' + commentedUserId + '/' + userId, { comment: _comment, rating: rating });
+    comment: function comment(commentedUserId, userId, commentText, rating) {
+        return this.call('post', 'user/comment/' + commentedUserId + '/' + userId, { commentText: commentText, rating: rating });
     },
     geoLocalize: function geoLocalize(lat, lng) {
         return axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyCRDIKkOEGj3jXB9LEuiC8_yYiu535htcI').then(function (res) {
