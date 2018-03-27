@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import api from '../api'
-import { withRouter } from "react-router-dom"
+import {withRouter} from "react-router-dom"
 import moment from 'moment'
 
 class UpdateTrip extends Component {
@@ -44,37 +44,33 @@ class UpdateTrip extends Component {
 
 
     updateTrip() {
-        const { from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
+        const {from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password} = this.state
 
         api.updateTrip(this.props.trip.creator, this.props.trip._id, from, to, date, meetingPoint, departureTime, returnTime, tripTime, price, distance, seats, description, password)
             .then(res => {
-                try {
-                    this.setState({closeModal:true})
-                    this.setState({success: res.data})
 
-
-                }
-                catch(error){
+                if (res.status === 'OK') {
+                    this.setState({closeModal: true})
+                    this.setState({
+                        success: res.data,
+                        from: '',
+                        to: '',
+                        date: '',
+                        departureTime: '',
+                        returnTime: '',
+                        tripTime: '',
+                        price: '',
+                        distance: '',
+                        seats: '',
+                        meetingPoint: '',
+                        description: ''
+                    })
+                } else {
                     this.setState({error: res.error})
                 }
 
-
-
             })
-
-            .then(() => this.setState({
-                from: '',
-                to: '',
-                date: '',
-                departureTime: '',
-                returnTime: '',
-                tripTime: '',
-                price: '',
-                distance: '',
-                seats: '',
-                meetingPoint: '',
-                description: ''
-            }))
+            .catch(err => this.setState({error: err}))
 
 
     }
@@ -202,12 +198,12 @@ class UpdateTrip extends Component {
                                   value={this.state.description}/>
                             </div>
                             <div className="uk-width-1-1">
-                        <input type="text"
-                                  className="uk-input"
-                                  placeholder="Password"
-                                  required="true"
-                                  onChange={e => this.keepPassword(e.target.value)}
-                                  value={this.state.password}/>
+                                <input type="text"
+                                       className="uk-input"
+                                       placeholder="Password"
+                                       required="true"
+                                       onChange={e => this.keepPassword(e.target.value)}
+                                       value={this.state.password}/>
                             </div>
                             <div>
                                 <input type="submit"
@@ -216,7 +212,8 @@ class UpdateTrip extends Component {
                             </div>
 
                         </form>
-                        {this.state.error? <h2 className="uk-text-center uk-text-danger">{this.state.error}</h2>:''}
+                        {this.state.error ?
+                            <h3 className="uk-text-center uk-alert-danger uk-padding-small">{this.state.error}</h3> : ''}
                     </div>
                 </div>
             </div>
