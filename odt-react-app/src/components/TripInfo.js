@@ -3,6 +3,7 @@ import {withRouter, NavLink} from "react-router-dom"
 import api from '../api'
 import Confirmation from './Confirmation'
 import CommentForm from './CommentForm'
+import moment from 'moment'
 
 
 
@@ -53,18 +54,23 @@ class TripInfo extends Component {
     render(){
         const trip = this.state.trip
 
-        const date = trip !==''? trip.departureDate.slice(0,10) : ''
+        const date = moment(trip.departureDate).format('MMMM DD,  YYYY')
         const passengers = trip !== ''? trip.passengers: ''
-        const passengersLength = trip !==''? trip.passengers.length : ''
-        const seats = trip !==''? trip.seats - passengersLength : ''
+        const passengersLength = passengers.length
+        const seats = trip.seats - passengersLength
+        const departureTime = moment(trip.departureDate).format('hh:mm')
+        const returnTime = moment(trip.returnDate).format('hh:mm')
         return (
 
             <div className="uk-container">
                <div className="basic-info-data uk-h4 uk-margin-large-bottom">
                    From {trip.from}  to {trip.to} <br/>
                    Distance: {trip.distance}Km, Trip time: {trip.tripTime} hours <br/>
-                   {date}
+                   {date} <br/>
+                   Departure at {departureTime} <br/>
+                   Return at {returnTime} <br/>
                </div>
+                {seats <=0 ? <h3 className="uk-alert-danger uk-text-center uk-padding-small">This trip is fully booked</h3> : ''}
                 <div className="trip-panels" data-uk-grid>
                     <div className="uk-width-2-3@m">
                         <div className="uk-card uk-card-default uk-card-body">
@@ -93,16 +99,17 @@ class TripInfo extends Component {
                                 <span data-uk-icon="icon: user; ratio: 2"></span>
                             </div>
                             {seats} seats available
-                            <div className="book-button uk-flex uk-flex-center">
+                            {seats >0 ?  <div className="book-button uk-flex uk-flex-center">
                                 <button className="uk-button uk-button-primary"
-                                onClick={() => this.book()}>
+                                        onClick={() => this.book()}>
                                     Book!
                                 </button>
 
 
-                            </div>
-                            {this.state.success? <h3 className="uk-text-success">{this.state.success}</h3>: ''}
-                            {this.state.error? <h3 className="uk-text-danger">{this.state.error}</h3>: ''}
+                            </div>: ''}
+
+                            {this.state.success? <h3 className="uk-alert-success uk-text-center uk-padding-small">{this.state.success}</h3>: ''}
+                            {this.state.error? <h3 className="uk-alert-danger  uk-text-center uk-padding-small">{this.state.error}</h3>: ''}
 
                         </div>
 

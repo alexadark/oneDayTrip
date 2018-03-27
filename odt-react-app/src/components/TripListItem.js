@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import api from '../api'
+import moment from 'moment'
 
 class TripListItem extends Component {
     constructor(props){
@@ -19,7 +20,7 @@ class TripListItem extends Component {
 
 
     render(){
-        const date = this.props.trip.departureDate.slice(0,10)
+        const trip = this.props.trip
         const passengers = this.props.trip.passengers.length
         return (
             <div className="trip-list-item uk-card uk-card-default uk-card-body uk-margin-bottom" >
@@ -31,15 +32,15 @@ class TripListItem extends Component {
                         </NavLink>
                     </div>
                     <div className="date-place ">
-                       <p>{date}</p>
-                        <p>From {this.props.trip.from} - {this.props.trip.to}</p>
+                       <p>{moment(trip.departureDate).format('MMMM DD,  YYYY')}</p>
+                        <p>From {trip.from} - {trip.to}</p>
                     </div>
                     <div className="date-place ">
-                        <p>Price:{this.props.trip.price}E</p>
-                        <p>Available seats: {this.props.trip.seats - passengers}  </p>
+                        <p>Price:{trip.price}E</p>
+                        <p>Available seats: {trip.seats - passengers}  </p>
                     </div>
                     <div className="">
-                    <NavLink className="uk-button uk-button-primary " to={`/trip-info/${this.props.trip._id}`}>
+                    <NavLink className="uk-button uk-button-primary " to={`/trip-info/${trip._id}`}>
                         View details and book
                     </NavLink>
                     </div>
