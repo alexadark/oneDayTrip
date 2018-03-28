@@ -207,7 +207,7 @@ router.get('/available-trips/:destination/:arrival/:departure', (req,res) =>{
         }
     })
         .then(trips =>{
-            if(!trips) throw Error('there is no trips with these criterias')
+            if(trips.length === 0) throw Error('there is no trips with these criterias')
             return trips
         })
         .then((trips) => {

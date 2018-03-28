@@ -6,7 +6,7 @@ import moment from 'moment'
 
 //TODO put date and location into the title: This week ...
 
-//TODO geolocalize and show trips for the next 7 days
+
 
 
 class Home extends Component {
@@ -66,7 +66,7 @@ class Home extends Component {
                 .then(res => {
                     if(res.status === 'OK'){
                         this.setState({trips: res.data, spinner:'hidden', searchAround:'hidden'})
-                        this.state.trips.length === 0 ? this.setState({error: 'error'}) : this.setState({error: ''})
+                        this.state.trips.length === 0 ? this.setState({error: res.error}) : this.setState({error: ''})
                     } else {
                         this.setState({error: res.error})
                     }
@@ -102,6 +102,7 @@ class Home extends Component {
                                     <input type="text"
                                            className="uk-input"
                                            placeholder="Leaving from..."
+                                           required="true"
                                            onChange={e => this.keepLocation(e.target.value.toLowerCase())}
                                            value={this.state.location}/>
                                 </div>
@@ -109,6 +110,7 @@ class Home extends Component {
                                     <input type="date"
                                            className="uk-input"
                                            placeholder="from date"
+                                           required="true"
                                            onChange={e => this.keepArrival(e.target.value)}
                                            value={this.state.arrival}/>
                                 </div>
@@ -116,6 +118,7 @@ class Home extends Component {
                                     <input type="date"
                                            className="uk-input"
                                            placeholder="to date"
+                                           required="true"
                                            onChange={e => this.keepDeparture(e.target.value)}
                                            value={this.state.departure}/>
                                 </div>
@@ -148,7 +151,7 @@ class Home extends Component {
 
                 {/*<Route path={`/home/:location/:arrival/:departure`} component={TripList} />*/}
                 <div className="uk-container uk-padding">
-                {this.state.error === 'error' ? <h3 className="uk-alert-primary uk-text-center uk-padding-small">There is no trip matching your criterias</h3> :
+                {this.state.error  ? <h3 className="uk-alert-primary uk-text-center uk-padding-small">{this.state.error}</h3> :
                     <TripList trips={this.state.trips}/>
                  }
                 </div>
