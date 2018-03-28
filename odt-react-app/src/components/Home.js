@@ -65,7 +65,7 @@ class Home extends Component {
 
                 .then(res => {
                     if(res.status === 'OK'){
-                        this.setState({trips: res.data, spinner:'hidden', searchAround:'hidden'})
+                        this.setState({trips: res.data, location:'', arrival: '', departure: '', spinner:'hidden', searchAround:'hidden'})
                         this.state.trips.length === 0 ? this.setState({error: res.error}) : this.setState({error: ''})
                     } else {
                         this.setState({error: res.error})

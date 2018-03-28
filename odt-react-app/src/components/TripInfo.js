@@ -21,7 +21,8 @@ class TripInfo extends Component {
 
         this.state = {
             trip: '',
-            creator: ''
+            creator: '',
+            sameCreator:false
 
         }
     }
@@ -32,22 +33,23 @@ class TripInfo extends Component {
             .then(trip=>  api.getUserFromId(this.state.trip.creator)
                 .then((res) => this.setState({creator: res.data}))
             )
-
+            .then (() => this.state.trip.creator === this.props.user.id ? this.setState({sameCreator: true}) : '')
 
     }
 
     book = ()=> {
         api.joinTrip(this.state.trip._id, this.props.user.id)
+
             .then(res => {
-                try{
+                if(res.status === 'OK'){
                     this.setState({success: res.data})
-                    api.getTripFromId(this.props.match.params.tripId)
-                        .then((res) => this.setState({trip: res.data}))
-                }
-                catch(error){
+                             api.getTripFromId(this.props.match.params.tripId)
+                                 .then((res) => this.setState({trip: res.data}))
+                } else {
                     this.setState({error: res.error})
                 }
             })
+            .catch(err => this.setState({error:err}))
 
     }
 
@@ -60,6 +62,8 @@ class TripInfo extends Component {
         const seats = trip.seats - passengersLength
         const departureTime = moment(trip.departureDate).format('hh:mm')
         const returnTime = moment(trip.returnDate).format('hh:mm')
+        const creator = this.state.creator
+
         return (
 
             <div className="uk-container">
@@ -71,18 +75,24 @@ class TripInfo extends Component {
                    Return at {returnTime} <br/>
                </div>
                 {seats <=0 ? <h3 className="uk-alert-danger uk-text-center uk-padding-small">This trip is fully booked</h3> : ''}
+                {this.state.sameCreator === true ? <h3 className="uk-alert-danger uk-text-center uk-padding-small">You cannot book a trip that you have created</h3> : ''}
                 <div className="trip-panels" data-uk-grid>
                     <div className="uk-width-2-3@m">
                         <div className="uk-card uk-card-default uk-card-body">
                             <NavLink to={`/user-profile/${this.state.creator._id}`}>
-                                <span data-uk-icon="icon: user; ratio: 2"></span>
+                                {creator.picture === '' ?
+                                    <img src="https://cdn0.iconfinder.com/data/icons/Hand_Drawn_Web_Icon_Set/128/user.png"
+                                         alt=""
+                                         className="user-image uk-display-block"/> : <img src={creator.picture}
+                                                                                          className="uk-border-circle user-image uk-display-block"
+                                                                                          alt=""/>}
                                 {this.state.creator.name} {this.state.creator.surname}
                             </NavLink><br/>
                             meeting point: {trip.meetingPoint} <br/>
 
                             <p>{trip.description}</p>
 
-                                <CommentForm user={this.props.user} trip={this.state.trip}/>
+                            {this.state.sameCreator === false ?<CommentForm user={this.props.user} trip={this.state.trip}/> : ''}
 
 
 
@@ -99,7 +109,7 @@ class TripInfo extends Component {
                                 <span data-uk-icon="icon: user; ratio: 2"></span>
                             </div>
                             {seats} seats available
-                            {seats >0 ?  <div className="book-button uk-flex uk-flex-center">
+                            {seats >0 && this.state.sameCreator === false ?   <div className="book-button uk-flex uk-flex-center">
                                 <button className="uk-button uk-button-primary"
                                         onClick={() => this.book()}>
                                     Book!

@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   background: #f5f5f5
 }
 .uk-modal-page{
@@ -116,4 +115,8 @@ ul.spinner li:nth-child(4){
 
 .hidden{
   display: none !important;
+}
+
+.user-image{
+  width: 70px;
 }

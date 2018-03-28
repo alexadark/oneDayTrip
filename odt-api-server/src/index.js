@@ -313,10 +313,9 @@ router.put('/trip/join/:tripId/:passengerId', (req, res) => {
 
     Trip.findOne({"_id": ObjectId(tripId)})
         .then(trip => {
-            if (!trip.passengers) trip.passengers = [];
+            if (!trip.passengers) trip.passengers = []
+            // if(trip.creator.id === passengerId) throw Error ('You cannot join a trip that you have created')
 
-            if ((trip.passengers).includes({"_id": ObjectId(passengerId)})) throw Error('this passenger has already' +
-                ' joined this trip')
             if(trip.seats - trip.passengers.length < 1) throw Error ('This trip is fully booked')
             trip.passengers.push({"_id": ObjectId(passengerId)})
             return trip.save()

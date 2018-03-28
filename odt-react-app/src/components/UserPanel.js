@@ -31,19 +31,19 @@ class UserPanel extends Component {
           <NavLink to={'/home'} className="uk-button uk-button-primary uk-button-small  uk-margin-right">
             Search Trips
           </NavLink>
-          <NavLink to="/user-profile">
+
             <NavLink to={`/user-profile/${this.props.user.id}`} className="uk-button uk-button-primary uk-button-small uk-margin-right">
               see my reviews
             </NavLink>
-          </NavLink>
+
         </div>
 
         <div
           className="user-panels uk-margin-large-top uk-child-width-1-2@m"
           data-uk-grid
         >
-          <UserPublishedTrips user={this.state.user} />
-          <UserBookedTrips user={this.state.user} />
+          <UserPublishedTrips user={this.props.user} />
+          <UserBookedTrips user={this.props.user} />
         </div>
       </div>
     );
