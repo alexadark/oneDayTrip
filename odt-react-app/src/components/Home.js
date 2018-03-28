@@ -42,11 +42,8 @@ class Home extends Component {
                         const arrival = moment().format().slice(0, 10)
                         const departure = moment().add(7, 'days').format().slice(0, 10)
                         this.setState({location, arrival, departure, spinner:'hidden'})
-                        this.props.history.push(`/home/${location}/${arrival}/${departure}`)
-                        api.listTrips(location, arrival, departure)
-                            .then(res => {
-                                this.setState({trips: res.data})
-                            })
+
+                        this.search()
                     })
             }
         })
@@ -56,10 +53,15 @@ class Home extends Component {
     }
 
         searchTrips = () => {
+
+
+            this.search()
+
+
+        }
+
+        search = ()=>{
             const {location, arrival, departure} = this.state
-
-
-            //Send state in url parameters
             this.props.history.push(`/home/${location}/${arrival}/${departure}`)
             api.listTrips(location, arrival, departure)
 
@@ -72,9 +74,6 @@ class Home extends Component {
                     }
                 })
                 .catch(err => this.setState({error:err}))
-                // .then(res => {
-                //     this.setState({trips: res.data})
-                // })
         }
 
         keepLocation = location => this.setState({location})
@@ -152,6 +151,7 @@ class Home extends Component {
                 {/*<Route path={`/home/:location/:arrival/:departure`} component={TripList} />*/}
                 <div className="uk-container uk-padding">
                 {this.state.error  ? <h3 className="uk-alert-primary uk-text-center uk-padding-small">{this.state.error}</h3> :
+
                     <TripList trips={this.state.trips}/>
                  }
                 </div>
