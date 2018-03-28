@@ -4,10 +4,6 @@ import api from '../api'
 import {withRouter, Route} from "react-router-dom"
 import moment from 'moment'
 
-//TODO put date and location into the title: This week ...
-
-
-
 
 class Home extends Component {
     constructor(props) {

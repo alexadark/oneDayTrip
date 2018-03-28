@@ -198,7 +198,7 @@ class UpdateTrip extends Component {
                                   value={this.state.description}/>
                             </div>
                             <div className="uk-width-1-1">
-                                <input type="text"
+                                <input type="password"
                                        className="uk-input"
                                        placeholder="Password"
                                        required="true"

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {withRouter, NavLink} from "react-router-dom"
 import api from '../api'
-import Confirmation from './Confirmation'
 import CommentForm from './CommentForm'
 import moment from 'moment'
 
@@ -110,7 +109,7 @@ class TripInfo extends Component {
                             </div>
                             {seats} seats available
                             {seats >0 && this.state.sameCreator === false ?   <div className="book-button uk-flex uk-flex-center">
-                                <button className="uk-button uk-button-primary"
+                                <button className="uk-button uk-button-primary uk-margin-small-top"
                                         onClick={() => this.book()}>
                                     Book!
                                 </button>

@@ -42,21 +42,14 @@ class UpdateUser extends Component {
 
         api.updateUser(userId, name, surname, email, picture, newPassword, password)
             .then(res => {
-                try {
-                    this.setState({closeModal:true})
-                    this.setState({success: res.data})
-
-
-                }
-                catch(error){
-                    this.setState({error: error})
-                }
-
-
-
-            })
-
-
+            if (res.status === "OK") {
+                this.setState({closeModal: true})
+                this.setState({success: res.data})
+            } else {
+                this.setState({error: res.error})
+            }
+        })
+            .catch(err => this.setState({error: err}))
     }
 
 

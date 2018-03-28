@@ -64,7 +64,7 @@ class CancelTrip extends Component {
 
 
                             <div className="uk-margin-bottom">
-                            <input type="text"
+                            <input type="password"
                                   className="uk-input"
                                   placeholder="Password"
                                   required="true"
