@@ -40,7 +40,7 @@ class UpdateUser extends Component {
         const userId = this.props.user._id
 
 
-        api.updateUser(userId, name, surname, email, picture, newPassword, password)
+        api.updateUser(userId, name, surname, email, picture, password, newPassword)
             .then(res => {
             if (res.status === "OK") {
                 this.setState({closeModal: true})
@@ -52,7 +52,7 @@ class UpdateUser extends Component {
             .catch(err => this.setState({error: err}))
     }
 
-
+g
     keepName = name => this.setState({name});
     keepSurname = surname => this.setState({surname});
     keepEmail = email => this.setState({email});

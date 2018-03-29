@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {BrowserRouter, Route, Switch, Redirect, HashRouter} from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Header from './components/Header';
 import Publish from './components/Publish';
 import SignUp from './components/SignUp';

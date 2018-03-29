@@ -50,7 +50,7 @@ class Home extends Component {
 
         searchTrips = () => {
 
-
+            this.setState({searchAround: 'hidden'})
             this.search()
 
 
@@ -59,17 +59,6 @@ class Home extends Component {
         search = ()=>{
             const {location, arrival, departure} = this.state
             this.props.history.push(`/home/${location}/${arrival}/${departure}`)
-            api.listTrips(location, arrival, departure)
-
-                .then(res => {
-                    if(res.status === 'OK'){
-                        this.setState({trips: res.data, location:'', arrival: '', departure: '', spinner:'hidden', searchAround:'hidden'})
-                        this.state.trips.length === 0 ? this.setState({error: res.error}) : this.setState({error: ''})
-                    } else {
-                        this.setState({error: res.error})
-                    }
-                })
-                .catch(err => this.setState({error:err}))
         }
 
         keepLocation = location => this.setState({location})
@@ -144,13 +133,7 @@ class Home extends Component {
                     </ul>
                 </div>
 
-                {/*<Route path={`/home/:location/:arrival/:departure`} component={TripList} />*/}
-                <div className="uk-container uk-padding">
-                {this.state.error  ? <h3 className="uk-alert-primary uk-text-center uk-padding-small">{this.state.error}</h3> :
-
-                    <TripList trips={this.state.trips}/>
-                 }
-                </div>
+                <Route path={`/home/:location/:arrival/:departure`} component={TripList} />
             </div>
         }
     }
