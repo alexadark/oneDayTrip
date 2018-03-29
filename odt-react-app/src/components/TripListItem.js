@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import api from '../api'
 import moment from 'moment'
 
@@ -13,11 +13,21 @@ class TripListItem extends Component {
     }
 
     componentDidMount() {
-        api.getUserFromId(this.props.trip.creator)
-            .then((res) => this.setState({creator: res.data}))
+        const creatorId = this.props.trip.creator
 
+        this.getUser(creatorId)
     }
 
+    componentWillReceiveProps(props) {
+        const creatorId = props.trip.creator
+
+        this.getUser(creatorId)
+    }
+
+    getUser(id) {
+        api.getUserFromId(id)
+            .then((res) => this.setState({ creator: res.data }))
+    }
 
     render() {
         const trip = this.props.trip
@@ -31,9 +41,9 @@ class TripListItem extends Component {
                             {creator.picture === '' ?
                                 <img src="https://cdn0.iconfinder.com/data/icons/Hand_Drawn_Web_Icon_Set/128/user.png"
                                      alt=""
-                                     className="user-image uk-display-block"/> : <img src={creator.picture}
-                                                                                      className="uk-border-circle user-image uk-display-block"
-                                                                                      alt=""/>}
+                                     className="user-image uk-display-block" /> : <img src={creator.picture}
+                                                                                       className="uk-border-circle user-image uk-display-block"
+                                                                                       alt="" />}
                             <div className="creator">{creator.name} {creator.surname}</div>
                         </NavLink>
                     </div>
